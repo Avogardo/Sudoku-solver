@@ -91,11 +91,11 @@ const main = () => {
   ];
 
   if (solveSudoku(grid) === true) {
-    const a = performance.now();
+    const startTime = performance.now();
     solveSudoku(grid)
-    const b = performance.now();
-    console.log('It took ' + (b - a) + ' ms.');
-    document.getElementById('result').textContent = 'It took ' + (b - a) + ' ms. (result in console (F12))';
+    const endTime = performance.now();
+    console.log('It took ' + (endTime - startTime) + ' ms.');
+    document.getElementById('result').textContent = 'It took ' + (endTime - startTime) + ' ms. (result in console (F12))';
 
     printGrid(grid);
   } else {
