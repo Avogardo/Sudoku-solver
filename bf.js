@@ -87,24 +87,13 @@ const printGrid = (grid, elementId) => {
 };
 
 const main = () => {
-  const grid = [
-    [3,0,6,5,0,8,4,0,0],
-    [5,2,0,0,0,0,0,0,0],
-    [0,8,7,0,0,0,0,3,1],
-    [0,0,3,0,1,0,0,8,0],
-    [9,0,0,8,6,3,0,0,5],
-    [0,5,0,0,9,0,6,0,0],
-    [1,3,0,0,0,0,2,5,0],
-    [0,0,0,0,0,0,0,7,4],
-    [0,0,5,2,0,6,3,0,0]
-  ];
-
   printGrid(grid, 'inputGrid');
 
   if (solveSudoku(grid) === true) {
     const startTime = performance.now();
     solveSudoku(grid)
     const endTime = performance.now();
+    
     console.log('It took ' + (endTime - startTime) + ' ms.');
     document.getElementById('result').textContent = 'It took ' + (endTime - startTime) + ' ms. (result in console (F12))';
 
@@ -114,6 +103,19 @@ const main = () => {
   }
 };
 
+const grid = [
+  [3,0,6,5,0,8,4,0,0],
+  [5,2,0,0,0,0,0,0,0],
+  [0,8,7,0,0,0,0,3,1],
+  [0,0,3,0,1,0,0,8,0],
+  [9,0,0,8,6,3,0,0,5],
+  [0,5,0,0,9,0,6,0,0],
+  [1,3,0,0,0,0,2,5,0],
+  [0,0,0,0,0,0,0,7,4],
+  [0,0,5,2,0,6,3,0,0]
+];
+
 document.addEventListener('DOMContentLoaded', function() { 
+  printGrid(grid, 'inputGrid');
   document.getElementById('buttonOne').addEventListener('click', main);
 });
