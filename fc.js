@@ -145,13 +145,12 @@ console.log(state[0][4]);
 };
 
 const propagate = state => {
-  // while (true) {
-for (let i = 0; i < 11; i++) {
+  while (true) {
     const { solvable, new_unit } = propagate_step(state);
     console.log(solvable, new_unit, i);
     if (!solvable) {
       console.log(1);
-      // return false;
+      return false;
     }
     if (!new_unit) {
       console.log(2);
