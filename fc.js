@@ -11,36 +11,17 @@ grid = [
   [0,0,0,0,0,0,0,0,0],
 ];
 
-const print_grid = grid => {
-  if (!grid) {
-    console.log('no solution');
-    return;
+const printGrid = (grid, elementId) => {
+  let table = '';
+  for (let row = 0; row < 9; row++) {
+    for (let col = 0; col < 9; col++) {
+      table += `${grid[row][col]} `;
+    }
+    table += '<br>';
   }
 
-  for (let i = 0; i < 9; i++) {
-    for (let j = 0; j < 9; j++) {
-      const cell = grid[i][j];
-
-      if (cell === 0 || cell.length) {
-        console.log('.');
-      } else {
-        console.log(cell);
-      }
-
-      if ((j + 1) % 3 === 0 && j < 8) {
-        console.log('|');
-      }
-
-      if (j !== 0) {
-        console.log(' ');
-      }
-    }
-
-    console.log('\n');
-    if ((i + 1) % 3 === 0 && i < 8) {
-      console.log("- - - + - - - + - - -\n");
-    }
-  }
+  document.getElementById(elementId).innerHTML = table;
+  console.log(grid);
 };
 
 const read = grid => {
@@ -77,6 +58,9 @@ const propagate_step = state => {
     const values = row.filter(cell => !cell.length);
 
     for (let j = 0; j < 9; j++) {
+      if (typeof state[i][j] === "string") {
+        state[i][j] = Number(state[i][j])
+      }
       if (state[i][j].length) {
         state[i][j] = a_diff(state[i][j], values);
         if (state[i][j].length === 1) {
@@ -140,14 +124,14 @@ const propagate_step = state => {
       }
     }
   }
-console.log(state[0][4]);
+
   return {solvable: true, new_unit: new_units};
 };
 
 const propagate = state => {
   while (true) {
     const { solvable, new_unit } = propagate_step(state);
-    console.log(solvable, new_unit, i);
+
     if (!solvable) {
       console.log(1);
       return false;
@@ -218,9 +202,17 @@ const a_diff = (a1, a2) => {
 };
 
 const main = () => {
+  printGrid(grid, 'inputGrid');
+
+  const startTime = performance.now();
   const state = read(grid);
-  console.log(state);
-  print_grid(solve(state));
+  solve(state);
+  const endTime = performance.now();
+
+  document.getElementById('result').textContent = 'It took ' + (endTime - startTime) + ' ms. (result in console (F12))';
+
+
+  printGrid(state, 'outputGrid');
 };
 
 document.addEventListener('DOMContentLoaded', function() {
