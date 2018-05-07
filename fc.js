@@ -217,4 +217,21 @@ const main = () => {
 
 document.addEventListener('DOMContentLoaded', function() {
   document.getElementById('buttonOne').addEventListener('click', main);
+  document.getElementById('file').addEventListener('change', onChange);
+console.log(DATA)
 });
+
+
+const onChange = (event) => {
+    var reader = new FileReader();
+    reader.onload = onReaderLoad;
+    reader.readAsText(event.target.files[0]);
+}
+
+onReaderLoad = (event) => {
+    var obj = JSON.parse(event.target.result);
+    console.log(obj.grid);
+
+    var json = require('./data.json');
+}
+
