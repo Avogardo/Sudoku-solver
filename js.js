@@ -1,9 +1,11 @@
 class JumpingStudent {
   constructor(grid) {
     this.grid = grid[0];
-    this.puzzle = this.read(this.grid);
+    this.state = this.read(this.grid);
 
-    this.showGrid(this.puzzle);
+    this.propagate_step();
+
+    this.showGrid(this.state);
   }
 
   read(grid) {
@@ -19,6 +21,62 @@ class JumpingStudent {
     }
 
     return state;
+  }
+
+  propagate_step() {
+      const { state } = this;
+
+      for (let i = 0; i < 9; i++) {
+          const row = state[i];
+          const values = row.filter(cell => !cell.length);
+
+          for (let j = 0; j < 9; j++) {
+              if (typeof state[i][j] === "string") {
+                  state[i][j] = Number(state[i][j])
+              }
+              if (state[i][j].length) {
+                  state[i][j] = this.arrays_subtraction(state[i][j], values);
+              }
+          }
+      }
+
+      for (let j = 0; j < 9; j++) {
+          const column = [];
+          for (let col = 0; col < 9; col++) {
+              column.push(state[col][j]);
+          }
+          const values = column.filter(cell => !cell.length);
+
+          for (let i = 0; i < 9; i++) {
+              if (state[i][j].length) {
+                  state[i][j] = this.arrays_subtraction(state[i][j], values);
+              }
+          }
+      }
+
+      for (let x = 0; x < 3; x++) {
+          for (let y = 0; y < 3; y++) {
+              const values = [];
+
+              for (let i = 3 * x; i < 3 * x + 3; i++) {
+                  for (let j = 3 * y; j < 3 * y + 3; j++) {
+                      const cell = state[i][j];
+
+                      if (!cell.length) {
+                          values.push(cell);
+                      }
+                  }
+              }
+
+              for (let i = 3 * x; i < 3 * x + 3; i++) {
+                  for (let j = 3 * y; j < 3 * y + 3; j++) {
+                      if (state[i][j].length) {
+                          state[i][j] = this.arrays_subtraction(state[i][j], values);
+                      }
+                  }
+              }
+          }
+      }
   }
 
   clone(existingArray) {
@@ -54,7 +112,7 @@ class JumpingStudent {
 }
 
 document.addEventListener('DOMContentLoaded', function() {
-    console.log(DATA);
+    console.log(DATA[0]);
 
     const jumpingStudent = new JumpingStudent(DATA);
 });
