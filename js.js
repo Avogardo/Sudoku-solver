@@ -4,6 +4,7 @@ class JumpingStudent {
     this.state = this.read(this.grid);
 
     this.propagate_step();
+    this.firstStep();
 
     this.showGrid(this.state);
   }
@@ -21,6 +22,43 @@ class JumpingStudent {
     }
 
     return state;
+  }
+
+  firstStep() {
+      const { state } = this;
+      
+      for (let x = 0; x < 3; x++) {
+          for (let y = 0; y < 3; y++) {
+              for (let i = 3 * x; i < 3 * x + 3; i++) {
+                  for (let j = 3 * y; j < 3 * y + 3; j++) {
+                      if (state[i][j].length) {
+                          state[i][j] = state[i][j][0];
+                      }
+                  }
+              }
+          }
+      }
+
+      const isSolved = this.isSolved();
+      console.log(isSolved);
+  }
+
+  isSolved() {
+      const { state } = this;
+
+      for (let x = 0; x < 3; x++) {
+          for (let y = 0; y < 3; y++) {
+              for (let i = 3 * x; i < 3 * x + 3; i++) {
+                  for (let j = 3 * y; j < 3 * y + 3; j++) {
+                      if (state[i][j].length) {
+                          return false;
+                      }
+                  }
+              }
+          }
+      }
+
+      return true;
   }
 
   propagate_step() {
