@@ -211,7 +211,6 @@ const main = () => {
 
   document.getElementById('result').textContent = 'It took ' + (endTime - startTime) + ' ms. (result in console (F12))';
 
-
   printGrid(state, 'outputGrid');
 };
 
@@ -223,15 +222,15 @@ console.log(DATA)
 
 
 const onChange = (event) => {
-    var reader = new FileReader();
+    const reader = new FileReader();
     reader.onload = onReaderLoad;
     reader.readAsText(event.target.files[0]);
-}
+};
 
 onReaderLoad = (event) => {
-    var obj = JSON.parse(event.target.result);
+    const obj = JSON.parse(event.target.result);
     console.log(obj.grid);
 
-    var json = require('./data.json');
-}
-
+    const json = require('./data.json');
+    console.log(json);
+};

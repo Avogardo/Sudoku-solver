@@ -6,7 +6,7 @@ class JumpingStudent {
     this.propagate_step();
     this.firstStep();
 
-    this.showGrid(this.state);
+    JumpingStudent.showGrid(this.state);
   }
 
   read(grid) {
@@ -26,7 +26,7 @@ class JumpingStudent {
 
   firstStep() {
       const { state } = this;
-      
+
       for (let x = 0; x < 3; x++) {
           for (let y = 0; y < 3; y++) {
               for (let i = 3 * x; i < 3 * x + 3; i++) {
@@ -120,8 +120,8 @@ class JumpingStudent {
   clone(existingArray) {
     let newObj = (existingArray instanceof Array) ? [] : {};
       for (let i in existingArray) {
-        if (i == 'clone') continue;
-          if (existingArray[i] && typeof existingArray[i] == "object") {
+        if (i === 'clone') continue;
+          if (existingArray[i] && typeof existingArray[i] === "object") {
             newObj[i] = this.clone(existingArray[i]);
           } else {
             newObj[i] = existingArray[i]
@@ -144,7 +144,7 @@ class JumpingStudent {
     return newArray;
   }
 
-  showGrid(grid) {
+    static showGrid(grid) {
     console.log(grid);
   }
 }
@@ -152,5 +152,5 @@ class JumpingStudent {
 document.addEventListener('DOMContentLoaded', function() {
     console.log(DATA[0]);
 
-    const jumpingStudent = new JumpingStudent(DATA);
+    new JumpingStudent(DATA);
 });
