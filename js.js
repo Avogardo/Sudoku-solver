@@ -34,6 +34,20 @@ class JumpingStudent {
     return newObj;
   }
 
+  arrays_subtraction(array1, array2) {
+    const newArray = [];
+
+    array1.forEach(element => {
+      const areBoth = array2.find(element2 => element2 === element);
+
+      if (!areBoth) {
+        newArray.push(element);
+      }
+    });
+
+    return newArray;
+  }
+
   showGrid(grid) {
     console.log(grid);
   }
