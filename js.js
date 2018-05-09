@@ -26,21 +26,58 @@ class JumpingStudent {
 
   firstStep() {
       const { state } = this;
+      const stateCopy = this.clone(state);
+      const gridHelper = [
+          [0,0,0,0,0,0,0,0,0],
+          [0,0,0,0,0,0,0,0,0],
+          [0,0,0,0,0,0,0,0,0],
+          [0,0,0,0,0,0,0,0,0],
+          [0,0,0,0,0,0,0,0,0],
+          [0,0,0,0,0,0,0,0,0],
+          [0,0,0,0,0,0,0,0,0],
+          [0,0,0,0,0,0,0,0,0],
+          [0,0,0,0,0,0,0,0,0],
+      ];
+
+      let square = [];
+      let shortest = {};
 
       for (let x = 0; x < 3; x++) {
           for (let y = 0; y < 3; y++) {
+
               for (let i = 3 * x; i < 3 * x + 3; i++) {
                   for (let j = 3 * y; j < 3 * y + 3; j++) {
                       if (state[i][j].length) {
-                          state[i][j] = state[i][j][0];
+                          square.push({ state: state[i][j], i, j });
                       }
                   }
               }
+
+
+              if (square.length) {
+                  console.log('square', square);
+                  shortest = square[square
+                      .map(a => a.state.length)
+                      .indexOf(Math.min.apply(Math, square.map(a => a.state.length)))];
+                  console.log('shortest', shortest);
+
+                  state[shortest.i][shortest.j] = stateCopy[shortest.i][shortest.j][gridHelper[shortest.i][shortest.j]];
+                  gridHelper[shortest.i][shortest.j] = gridHelper[shortest.i][shortest.j] + 1;
+                  console.log('gridHelper', gridHelper);
+
+
+
+                  console.log('===========');
+              }
+
+              square = [];
           }
       }
 
       const isSolved = this.isSolved();
       console.log(isSolved);
+      console.log(state);
+      console.log(stateCopy);
   }
 
   isSolved() {
@@ -145,7 +182,6 @@ class JumpingStudent {
   }
 
     static showGrid(grid) {
-    console.log(grid);
   }
 }
 
