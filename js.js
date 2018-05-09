@@ -4,9 +4,9 @@ class JumpingStudent {
     this.state = this.read(this.grid);
 
     this.propagate_step();
-    this.solveSudoku();
+    const result = this.solveSudoku();
 
-    JumpingStudent.showGrid(this.state);
+    JumpingStudent.showGrid(result);
   }
 
   read(grid) {
@@ -35,20 +35,18 @@ class JumpingStudent {
 
         const row = l[0];
         const col = l[1];
-        console.log(stateCopy[row][col]);
-        stateCopy[row][col].forEach(num => {
+
+        for (let num of stateCopy[row][col]) {
             if (this.isSafe(state, row, col, num)) {
                 state[row][col] = num;
 
                 if (this.solveSudoku(state)) {
-                    state.forEach(row => console.log(row));
-                    console.log('solved', state);
-                    return true;
+                    return state;
                 }
 
                 state[row][col] = stateCopy[row][col];
             }
-        });
+        }
 
         return false;
     }
