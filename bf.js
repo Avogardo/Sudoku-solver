@@ -5,7 +5,7 @@ const solveSudoku = (grid) => {
     return true;
   }
 
-  const row = l[0]
+  const row = l[0];
   const col = l[1];
 
   for (let num = 1; num <= 9; num++) {
@@ -91,7 +91,7 @@ const main = () => {
 
   if (solveSudoku(grid) === true) {
     const startTime = performance.now();
-    solveSudoku(grid)
+    solveSudoku(grid);
     const endTime = performance.now();
     
     console.log('It took ' + (endTime - startTime) + ' ms.');

@@ -4,7 +4,7 @@ class JumpingStudent {
     this.state = this.read(this.grid);
 
     this.propagate_step();
-    this.firstStep();
+    this.solveSudoku();
 
     JumpingStudent.showGrid(this.state);
   }
@@ -24,61 +24,149 @@ class JumpingStudent {
     return state;
   }
 
-  firstStep() {
+    solveSudoku() {
       const { state } = this;
-      const stateCopy = this.clone(state);
-      const gridHelper = [
-          [0,0,0,0,0,0,0,0,0],
-          [0,0,0,0,0,0,0,0,0],
-          [0,0,0,0,0,0,0,0,0],
-          [0,0,0,0,0,0,0,0,0],
-          [0,0,0,0,0,0,0,0,0],
-          [0,0,0,0,0,0,0,0,0],
-          [0,0,0,0,0,0,0,0,0],
-          [0,0,0,0,0,0,0,0,0],
-          [0,0,0,0,0,0,0,0,0],
-      ];
+        const l = [0, 0];
+        const stateCopy = this.clone(state);
 
-      let square = [];
-      let shortest = {};
+        if (!this.findUnassignedLocation(state, l)) {
+            return true;
+        }
 
-      for (let x = 0; x < 3; x++) {
-          for (let y = 0; y < 3; y++) {
+        const row = l[0];
+        const col = l[1];
+        console.log(stateCopy[row][col]);
+        stateCopy[row][col].forEach(num => {
+            if (this.isSafe(state, row, col, num)) {
+                state[row][col] = num;
 
-              for (let i = 3 * x; i < 3 * x + 3; i++) {
-                  for (let j = 3 * y; j < 3 * y + 3; j++) {
-                      if (state[i][j].length) {
-                          square.push({ state: state[i][j], i, j });
-                      }
-                  }
-              }
+                if (this.solveSudoku(state)) {
+                    state.forEach(row => console.log(row));
+                    console.log('solved', state);
+                    return true;
+                }
 
+                state[row][col] = stateCopy[row][col];
+            }
+        });
 
-              if (square.length) {
-                  console.log('square', square);
-                  shortest = square[square
-                      .map(a => a.state.length)
-                      .indexOf(Math.min.apply(Math, square.map(a => a.state.length)))];
-                  console.log('shortest', shortest);
+        return false;
+    }
 
-                  state[shortest.i][shortest.j] = stateCopy[shortest.i][shortest.j][gridHelper[shortest.i][shortest.j]];
-                  gridHelper[shortest.i][shortest.j] = gridHelper[shortest.i][shortest.j] + 1;
-                  console.log('gridHelper', gridHelper);
+    findUnassignedLocation(grid, l) {
+        for (let row = 0; row < 9; row++) {
+            for (let col = 0; col < 9; col++) {
+                if (Array.isArray(grid[row][col])) {
+                    l[0] = row;
+                    l[1] = col;
+                    return true;
+                }
+            }
+        }
 
+        return false;
+    }
 
+  // firstStep() {
+  //     const { state } = this;
+  //     const stateCopy = this.clone(state);
+  //     const gridHelper = [
+  //         [0,0,0,0,0,0,0,0,0],
+  //         [0,0,0,0,0,0,0,0,0],
+  //         [0,0,0,0,0,0,0,0,0],
+  //         [0,0,0,0,0,0,0,0,0],
+  //         [0,0,0,0,0,0,0,0,0],
+  //         [0,0,0,0,0,0,0,0,0],
+  //         [0,0,0,0,0,0,0,0,0],
+  //         [0,0,0,0,0,0,0,0,0],
+  //         [0,0,0,0,0,0,0,0,0],
+  //     ];
+  //
+  //     let square = [];
+  //     let shortest = {};
+  //     let step = 1;
+  //     let isSafe = true;
+  //
+  //     for (let x = 0; x < 3; x++) {
+  //         for (let y = 0; y < 3; y++) {
+  //
+  //             for (let i = 3 * x; i < 3 * x + 3; i++) {
+  //                 for (let j = 3 * y; j < 3 * y + 3; j++) {
+  //                     if (state[i][j].length) {
+  //                         square.push({ state: state[i][j], i, j });
+  //                     }
+  //                 }
+  //             }
+  //
+  //
+  //             if (square.length) {
+  //                 console.log('square', square);
+  //                 shortest = square[square
+  //                     .map(a => a.state.length)
+  //                     .indexOf(Math.min.apply(Math, square.map(a => a.state.length)))];
+  //                 console.log('shortest', shortest);
+  //
+  //                 isSafe = this.isSafe(state, shortest.i, shortest.j, stateCopy[shortest.i][shortest.j][0]);
+  //                 console.log(isSafe, stateCopy[shortest.i][shortest.j][0]);
+  //
+  //                 state[shortest.i][shortest.j] = stateCopy[shortest.i][shortest.j][0]; // first element of cell array
+  //                 gridHelper[shortest.i][shortest.j] = step;
+  //                 step = step + 1;
+  //                 console.log('gridHelper', gridHelper);
+  //
+  //
+  //
+  //                 console.log('===========');
+  //             }
+  //
+  //             square = [];
+  //         }
+  //     }
+  //
+  //     const isSolved = this.isSolved();
+  //     console.log(isSolved);
+  //     console.log(state);
+  //     console.log(stateCopy);
+  // }
 
-                  console.log('===========');
-              }
+    usedInRow(grid, row, num) {
+        for (let col = 0; col < 9; col++) {
+            if (!Array.isArray(grid[row][col]) && grid[row][col] === num) {
+                return true;
+            }
+        }
+        return false;
+    }
 
-              square = [];
-          }
-      }
+    usedInCol(grid, col, num) {
+        for (let row = 0; row < 9; row++) {
+            if (!Array.isArray(grid[row][col]) && grid[row][col] === num) {
+                return true;
+            }
+        }
+        return false;
+    }
 
-      const isSolved = this.isSolved();
-      console.log(isSolved);
-      console.log(state);
-      console.log(stateCopy);
-  }
+    usedInBox(grid, boxStartRow, boxStartCol, num) {
+        for (let row = 0; row < 3; row++) {
+            for (let col = 0; col < 3; col++) {
+                if (
+                    !Array.isArray(grid[row + boxStartRow][col + boxStartCol]) &&
+                    grid[row + boxStartRow][col + boxStartCol] === num === num
+                ) {
+                    return true;
+                }
+            }
+        }
+
+        return false;
+    }
+
+    isSafe(grid, row, col, num) {
+        return !this.usedInRow(grid, row, num) &&
+            !this.usedInCol(grid, col, num) &&
+            !this.usedInBox(grid, row - row % 3, col - col % 3, num);
+    }
 
   isSolved() {
       const { state } = this;
@@ -182,6 +270,7 @@ class JumpingStudent {
   }
 
     static showGrid(grid) {
+      console.log(grid);
   }
 }
 
