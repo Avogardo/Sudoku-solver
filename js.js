@@ -26,7 +26,7 @@ class JumpingStudent {
 
     solveSudoku() {
       const { state } = this;
-        const l = [0, 0];
+        const l = [0, 0, 0, 0];
         const stateCopy = this.clone(state);
 
         if (!this.findUnassignedLocation(state, l)) {
@@ -52,80 +52,32 @@ class JumpingStudent {
     }
 
     findUnassignedLocation(grid, l) {
-        for (let row = 0; row < 9; row++) {
-            for (let col = 0; col < 9; col++) {
-                if (Array.isArray(grid[row][col])) {
-                    l[0] = row;
-                    l[1] = col;
-                    return true;
+        if (l[2] > 2) {
+            l[2] = 0;
+        }
+
+        if (l[3] > 2) {
+            l[3] = 0;
+        }
+
+        for (let x = l[2]; x < 3; x++) {
+            for (let y = l[3]; y < 3; y++) {
+                for (let i = 3 * x; i < 3 * x + 3; i++) {
+                    for (let j = 3 * y; j < 3 * y + 3; j++) {
+                        if (Array.isArray(grid[i][j])) {
+                            l[0] = i;
+                            l[1] = j;
+                            l[3] = x + 1;
+                            l[4] = y + 1;
+                            return true;
+                        }
+                    }
                 }
             }
         }
 
         return false;
     }
-
-  // firstStep() {
-  //     const { state } = this;
-  //     const stateCopy = this.clone(state);
-  //     const gridHelper = [
-  //         [0,0,0,0,0,0,0,0,0],
-  //         [0,0,0,0,0,0,0,0,0],
-  //         [0,0,0,0,0,0,0,0,0],
-  //         [0,0,0,0,0,0,0,0,0],
-  //         [0,0,0,0,0,0,0,0,0],
-  //         [0,0,0,0,0,0,0,0,0],
-  //         [0,0,0,0,0,0,0,0,0],
-  //         [0,0,0,0,0,0,0,0,0],
-  //         [0,0,0,0,0,0,0,0,0],
-  //     ];
-  //
-  //     let square = [];
-  //     let shortest = {};
-  //     let step = 1;
-  //     let isSafe = true;
-  //
-  //     for (let x = 0; x < 3; x++) {
-  //         for (let y = 0; y < 3; y++) {
-  //
-  //             for (let i = 3 * x; i < 3 * x + 3; i++) {
-  //                 for (let j = 3 * y; j < 3 * y + 3; j++) {
-  //                     if (state[i][j].length) {
-  //                         square.push({ state: state[i][j], i, j });
-  //                     }
-  //                 }
-  //             }
-  //
-  //
-  //             if (square.length) {
-  //                 console.log('square', square);
-  //                 shortest = square[square
-  //                     .map(a => a.state.length)
-  //                     .indexOf(Math.min.apply(Math, square.map(a => a.state.length)))];
-  //                 console.log('shortest', shortest);
-  //
-  //                 isSafe = this.isSafe(state, shortest.i, shortest.j, stateCopy[shortest.i][shortest.j][0]);
-  //                 console.log(isSafe, stateCopy[shortest.i][shortest.j][0]);
-  //
-  //                 state[shortest.i][shortest.j] = stateCopy[shortest.i][shortest.j][0]; // first element of cell array
-  //                 gridHelper[shortest.i][shortest.j] = step;
-  //                 step = step + 1;
-  //                 console.log('gridHelper', gridHelper);
-  //
-  //
-  //
-  //                 console.log('===========');
-  //             }
-  //
-  //             square = [];
-  //         }
-  //     }
-  //
-  //     const isSolved = this.isSolved();
-  //     console.log(isSolved);
-  //     console.log(state);
-  //     console.log(stateCopy);
-  // }
 
     usedInRow(grid, row, num) {
         for (let col = 0; col < 9; col++) {
@@ -165,24 +117,6 @@ class JumpingStudent {
             !this.usedInCol(grid, col, num) &&
             !this.usedInBox(grid, row - row % 3, col - col % 3, num);
     }
-
-  isSolved() {
-      const { state } = this;
-
-      for (let x = 0; x < 3; x++) {
-          for (let y = 0; y < 3; y++) {
-              for (let i = 3 * x; i < 3 * x + 3; i++) {
-                  for (let j = 3 * y; j < 3 * y + 3; j++) {
-                      if (state[i][j].length) {
-                          return false;
-                      }
-                  }
-              }
-          }
-      }
-
-      return true;
-  }
 
   propagate_step() {
       const { state } = this;
