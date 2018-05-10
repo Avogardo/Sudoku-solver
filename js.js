@@ -3,8 +3,12 @@ class JumpingStudent {
     this.grid = grid[0];
     this.state = this.read(this.grid);
 
+    const startTime = performance.now();
     this.propagate_step();
     const result = this.solveSudoku();
+    const endTime = performance.now();
+
+    document.getElementById('result').textContent = 'It took ' + (endTime - startTime) + ' ms. (result in console (F12))';
 
     JumpingStudent.showGrid(result);
   }
@@ -223,7 +227,7 @@ class JumpingStudent {
 }
 
 document.addEventListener('DOMContentLoaded', function () {
-  console.log(DATA[0]);
-
-  new JumpingStudent(DATA);
+  document.getElementById('buttonOne').addEventListener('click', () => {
+    new JumpingStudent(DATA);
+  });
 });
