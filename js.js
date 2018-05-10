@@ -52,6 +52,8 @@ class JumpingStudent {
     }
 
     findUnassignedLocation(grid, l) {
+      let square = [];
+
         if (l[2] > 2) {
             l[2] = 0;
         }
@@ -65,14 +67,25 @@ class JumpingStudent {
                 for (let i = 3 * x; i < 3 * x + 3; i++) {
                     for (let j = 3 * y; j < 3 * y + 3; j++) {
                         if (Array.isArray(grid[i][j])) {
-                            l[0] = i;
-                            l[1] = j;
-                            l[3] = x + 1;
-                            l[4] = y + 1;
-                            return true;
+                            square.push({ state: grid[i][j], i, j, x, y });
                         }
                     }
                 }
+
+                if (square.length) {
+                    const shortest = square[square
+                        .map(a => a.state.length)
+                        .indexOf(Math.min.apply(Math, square.map(a => a.state.length)))];
+
+                    l[0] = shortest.i;
+                    l[1] = shortest.j;
+                    l[3] = x + 1;
+                    l[4] = y + 1;
+                    square = [];
+                    return true;
+                }
+
+                square = [];
             }
         }
 
