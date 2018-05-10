@@ -1,15 +1,17 @@
 N = 9;
 grid = [
-  [5,1,7,6,0,0,0,3,4],
-  [2,8,9,0,0,4,0,0,0],
-  [3,4,6,2,0,5,0,9,0],
-  [6,0,2,0,0,0,0,1,0],
-  [0,3,8,0,0,6,0,4,7],
-  [0,0,0,0,0,0,0,0,0],
-  [0,9,0,0,0,0,0,7,8],
-  [7,0,3,4,0,0,5,6,0],
-  [0,0,0,0,0,0,0,0,0],
+  [5, 1, 7, 6, 0, 0, 0, 3, 4],
+  [2, 8, 9, 0, 0, 4, 0, 0, 0],
+  [3, 4, 6, 2, 0, 5, 0, 9, 0],
+  [6, 0, 2, 0, 0, 0, 0, 1, 0],
+  [0, 3, 8, 0, 0, 6, 0, 4, 7],
+  [0, 0, 0, 0, 0, 0, 0, 0, 0],
+  [0, 9, 0, 0, 0, 0, 0, 7, 8],
+  [7, 0, 3, 4, 0, 0, 5, 6, 0],
+  [0, 0, 0, 0, 0, 0, 0, 0, 0],
 ];
+
+result = [];
 
 const printGrid = (grid, elementId) => {
   let table = '';
@@ -21,7 +23,6 @@ const printGrid = (grid, elementId) => {
   }
 
   document.getElementById(elementId).innerHTML = table;
-  console.log(grid);
 };
 
 const read = grid => {
@@ -40,8 +41,8 @@ const read = grid => {
 };
 
 const done = state => {
-  for (let row in state) {
-    for (let cell in row) {
+  for (let row of state) {
+    for (let cell of row) {
       if (cell.length) {
         return false;
       }
@@ -58,9 +59,6 @@ const propagate_step = state => {
     const values = row.filter(cell => !cell.length);
 
     for (let j = 0; j < 9; j++) {
-      if (typeof state[i][j] === "string") {
-        state[i][j] = Number(state[i][j])
-      }
       if (state[i][j].length) {
         state[i][j] = a_diff(state[i][j], values);
         if (state[i][j].length === 1) {
@@ -130,14 +128,13 @@ const propagate_step = state => {
 
 const propagate = state => {
   while (true) {
-    const { solvable, new_unit } = propagate_step(state);
+    const {solvable, new_unit} = propagate_step(state);
 
     if (!solvable) {
-      console.log(1);
       return false;
     }
     if (!new_unit) {
-      console.log(2);
+      result = clone(state);
       return true;
     }
   }
@@ -158,14 +155,14 @@ const solve = state => {
       const cell = state[i][j];
 
       if (cell.length) {
-        for (let value in cell) {
+        for (let value of cell) {
           const new_state = clone(state);
           new_state[i][j] = value;
           const solved = solve(new_state);
-          
+
           if (solved) {
             return solved;
-          } 
+          }
         }
 
         return false;
@@ -175,30 +172,30 @@ const solve = state => {
 };
 
 const clone = existingArray => {
-   let newObj = (existingArray instanceof Array) ? [] : {};
-   for (i in existingArray) {
-      if (i == 'clone') continue;
-      if (existingArray[i] && typeof existingArray[i] == "object") {
-         newObj[i] = clone(existingArray[i]);
-      } else {
-         newObj[i] = existingArray[i]
-      }
-   }
-   return newObj;
+  let newObj = (existingArray instanceof Array) ? [] : {};
+  for (i in existingArray) {
+    if (i == 'clone') continue;
+    if (existingArray[i] && typeof existingArray[i] == "object") {
+      newObj[i] = clone(existingArray[i]);
+    } else {
+      newObj[i] = existingArray[i]
+    }
+  }
+  return newObj;
 };
 
 const a_diff = (a1, a2) => {
-    const newArray = [];
+  const newArray = [];
 
-    a1.forEach(element => {
-      const areBoth = a2.find(element2 => element2 === element);
+  a1.forEach(element => {
+    const areBoth = a2.find(element2 => element2 === element);
 
-      if (!areBoth) {
-        newArray.push(element);
-      }
-    });
+    if (!areBoth) {
+      newArray.push(element);
+    }
+  });
 
-    return newArray;
+  return newArray;
 };
 
 const main = () => {
@@ -211,26 +208,26 @@ const main = () => {
 
   document.getElementById('result').textContent = 'It took ' + (endTime - startTime) + ' ms. (result in console (F12))';
 
-  printGrid(state, 'outputGrid');
+  printGrid(result, 'outputGrid');
 };
 
-document.addEventListener('DOMContentLoaded', function() {
+document.addEventListener('DOMContentLoaded', function () {
   document.getElementById('buttonOne').addEventListener('click', main);
   document.getElementById('file').addEventListener('change', onChange);
-console.log(DATA)
+  console.log(DATA)
 });
 
 
 const onChange = (event) => {
-    const reader = new FileReader();
-    reader.onload = onReaderLoad;
-    reader.readAsText(event.target.files[0]);
+  const reader = new FileReader();
+  reader.onload = onReaderLoad;
+  reader.readAsText(event.target.files[0]);
 };
 
 onReaderLoad = (event) => {
-    const obj = JSON.parse(event.target.result);
-    console.log(obj.grid);
+  const obj = JSON.parse(event.target.result);
+  console.log(obj.grid);
 
-    const json = require('./data.json');
-    console.log(json);
+  const json = require('./data.json');
+  console.log(json);
 };

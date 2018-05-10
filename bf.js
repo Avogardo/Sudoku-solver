@@ -15,7 +15,7 @@ const solveSudoku = (grid) => {
       if (solveSudoku(grid)) {
         return true;
       }
-      
+
       grid[row][col] = 0;
     }
   }
@@ -93,7 +93,7 @@ const main = () => {
     const startTime = performance.now();
     solveSudoku(grid);
     const endTime = performance.now();
-    
+
     console.log('It took ' + (endTime - startTime) + ' ms.');
     document.getElementById('result').textContent = 'It took ' + (endTime - startTime) + ' ms. (result in console (F12))';
 
@@ -104,18 +104,18 @@ const main = () => {
 };
 
 const grid = [
-  [5,1,7,6,0,0,0,3,4],
-  [2,8,9,0,0,4,0,0,0],
-  [3,4,6,2,0,5,0,9,0],
-  [6,0,2,0,0,0,0,1,0],
-  [0,3,8,0,0,6,0,4,7],
-  [0,0,0,0,0,0,0,0,0],
-  [0,9,0,0,0,0,0,7,8],
-  [7,0,3,4,0,0,5,6,0],
-  [0,0,0,0,0,0,0,0,0],
+  [5, 1, 7, 6, 0, 0, 0, 3, 4],
+  [2, 8, 9, 0, 0, 4, 0, 0, 0],
+  [3, 4, 6, 2, 0, 5, 0, 9, 0],
+  [6, 0, 2, 0, 0, 0, 0, 1, 0],
+  [0, 3, 8, 0, 0, 6, 0, 4, 7],
+  [0, 0, 0, 0, 0, 0, 0, 0, 0],
+  [0, 9, 0, 0, 0, 0, 0, 7, 8],
+  [7, 0, 3, 4, 0, 0, 5, 6, 0],
+  [0, 0, 0, 0, 0, 0, 0, 0, 0],
 ];
 
-document.addEventListener('DOMContentLoaded', function() { 
+document.addEventListener('DOMContentLoaded', function () {
   printGrid(grid, 'inputGrid');
   document.getElementById('buttonOne').addEventListener('click', main);
 });
