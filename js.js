@@ -8,7 +8,7 @@ class JumpingStudent {
     const result = this.solveSudoku();
     const endTime = performance.now();
 
-    document.getElementById('result').textContent = 'It took ' + (endTime - startTime) + ' ms. (result in console (F12))';
+    document.getElementById('result').textContent = endTime - startTime;
 
     JumpingStudent.showGrid(result);
   }

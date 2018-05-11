@@ -23,19 +23,21 @@
                 </ul>
             </div>
 
-            <label for="file-upload" class="dropdown-button import-button">
-                Custom Upload
+            <label for="file" class="dropdown-button import-button">
+                Import puzzle
             </label>
-            <input id="file-upload" type="file"/>
+            <input id="file" type="file"/>
         </nav>
-        <div>
-            <form>
+        <div class="content-wrapper">
+            <form class="sudoku-counter-input-form">
                 <label for="sudoku-counter-input">Type how many times solve sudoku</label>
-                <input id="sudoku-counter-input" placeholder="e.g. 100">
-                <input id="file" class="dropdown-button small-button" type="submit" value="Execute">
+                <span class="sudoku-counter-input-wrapper">
+                    <input id="sudoku-counter-input" placeholder="e.g. 100">
+                    <input id="buttonOne" class="dropdown-button small-button" type="submit" value="Execute">
+                </span>
             </form>
 
-            <p>Result: <span id="result"></span></p>
+            <p>Result: It took <span id="result"></span> ms.</p>
             <div class="sudoku-container">
                 Input:
                 <div id="inputGrid"></div>
