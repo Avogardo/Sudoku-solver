@@ -60,7 +60,7 @@ const propagate_step = state => {
 
     for (let j = 0; j < 9; j++) {
       if (state[i][j].length) {
-        state[i][j] = a_diff(state[i][j], values);
+        state[i][j] = arrays_subtraction(state[i][j], values);
         if (state[i][j].length === 1) {
           state[i][j] = state[i][j].pop();
           new_units = true;
@@ -80,7 +80,7 @@ const propagate_step = state => {
 
     for (let i = 0; i < 9; i++) {
       if (state[i][j].length) {
-        state[i][j] = a_diff(state[i][j], values);
+        state[i][j] = arrays_subtraction(state[i][j], values);
 
         if (state[i][j].length === 1) {
           state[i][j] = state[i][j].pop();
@@ -109,7 +109,7 @@ const propagate_step = state => {
       for (let i = 3 * x; i < 3 * x + 3; i++) {
         for (let j = 3 * y; j < 3 * y + 3; j++) {
           if (state[i][j].length) {
-            state[i][j] = a_diff(state[i][j], values);
+            state[i][j] = arrays_subtraction(state[i][j], values);
 
             if (state[i][j].length === 1) {
               state[i][j] = state[i][j].pop();
@@ -169,33 +169,6 @@ const solve = state => {
       }
     }
   }
-};
-
-const clone = existingArray => {
-  let newObj = (existingArray instanceof Array) ? [] : {};
-  for (i in existingArray) {
-    if (i == 'clone') continue;
-    if (existingArray[i] && typeof existingArray[i] == "object") {
-      newObj[i] = clone(existingArray[i]);
-    } else {
-      newObj[i] = existingArray[i]
-    }
-  }
-  return newObj;
-};
-
-const a_diff = (a1, a2) => {
-  const newArray = [];
-
-  a1.forEach(element => {
-    const areBoth = a2.find(element2 => element2 === element);
-
-    if (!areBoth) {
-      newArray.push(element);
-    }
-  });
-
-  return newArray;
 };
 
 const main = () => {

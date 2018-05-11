@@ -4,7 +4,7 @@ class JumpingStudent {
     this.numberOfSolve = numberOfSolve;
     this.result = [];
 
-    this.updateLoader(true);
+    updateLoader(true);
 
     setTimeout(() => {
       const startTime = performance.now();
@@ -16,20 +16,15 @@ class JumpingStudent {
         }
       }
       const endTime = performance.now();
-      this.updateLoader(false);
+      updateLoader();
 
-      document.getElementById('result').textContent = endTime - startTime;
-      JumpingStudent.showGrid(this.result);
+      document.getElementById('result').textContent = `${endTime - startTime}`;
+      showGrid(this.result);
     }, 30);
   }
 
-  updateLoader(isWorking) {
-    document.querySelector('.loader-wrapper').style.zIndex = isWorking ? 10 : -1;
-    document.querySelector('.loader-wrapper').style.opacity = isWorking ? 1 : 0;
-  }
-
   read(grid) {
-    const state = this.clone(grid);
+    const state = clone(grid);
 
     for (let i = 0; i < 9; i++) {
       for (let j = 0; j < 9; j++) {
@@ -45,9 +40,9 @@ class JumpingStudent {
 
   solveSudoku(state) {
     const l = [0, 0, 0, 0];
-    const stateCopy = this.clone(state);
+    const stateCopy = clone(state);
 
-    if (!this.findUnassignedLocation(state, l)) {
+    if (!JumpingStudent.findUnassignedLocation(state, l)) {
       return true;
     }
 
@@ -55,7 +50,7 @@ class JumpingStudent {
     const col = l[1];
 
     for (let num of stateCopy[row][col]) {
-      if (this.isSafe(state, row, col, num)) {
+      if (JumpingStudent.isSafe(state, row, col, num)) {
         state[row][col] = num;
 
         if (this.solveSudoku(state)) {
@@ -69,7 +64,63 @@ class JumpingStudent {
     return false;
   }
 
-  findUnassignedLocation(grid, l) {
+  propagate_step(state) {
+    for (let i = 0; i < 9; i++) {
+      const row = state[i];
+      const values = row.filter(cell => !cell.length);
+
+      for (let j = 0; j < 9; j++) {
+        if (typeof state[i][j] === "string") {
+          state[i][j] = Number(state[i][j])
+        }
+        if (state[i][j].length) {
+          state[i][j] = arrays_subtraction(state[i][j], values);
+        }
+      }
+    }
+
+    for (let j = 0; j < 9; j++) {
+      const column = [];
+      for (let col = 0; col < 9; col++) {
+        column.push(state[col][j]);
+      }
+      const values = column.filter(cell => !cell.length);
+
+      for (let i = 0; i < 9; i++) {
+        if (state[i][j].length) {
+          state[i][j] = arrays_subtraction(state[i][j], values);
+        }
+      }
+    }
+
+    for (let x = 0; x < 3; x++) {
+      for (let y = 0; y < 3; y++) {
+        const values = [];
+
+        for (let i = 3 * x; i < 3 * x + 3; i++) {
+          for (let j = 3 * y; j < 3 * y + 3; j++) {
+            const cell = state[i][j];
+
+            if (!cell.length) {
+              values.push(cell);
+            }
+          }
+        }
+
+        for (let i = 3 * x; i < 3 * x + 3; i++) {
+          for (let j = 3 * y; j < 3 * y + 3; j++) {
+            if (state[i][j].length) {
+              state[i][j] = arrays_subtraction(state[i][j], values);
+            }
+          }
+        }
+      }
+    }
+
+    return this.solveSudoku(state);
+  }
+
+  static findUnassignedLocation(grid, l) {
     let square = [];
 
     if (l[2] > 2) {
@@ -110,7 +161,7 @@ class JumpingStudent {
     return false;
   }
 
-  usedInRow(grid, row, num) {
+  static usedInRow(grid, row, num) {
     for (let col = 0; col < 9; col++) {
       if (!Array.isArray(grid[row][col]) && grid[row][col] === num) {
         return true;
@@ -120,7 +171,7 @@ class JumpingStudent {
     return false;
   }
 
-  usedInCol(grid, col, num) {
+  static usedInCol(grid, col, num) {
     for (let row = 0; row < 9; row++) {
       if (!Array.isArray(grid[row][col]) && grid[row][col] === num) {
         return true;
@@ -130,7 +181,7 @@ class JumpingStudent {
     return false;
   }
 
-  usedInBox(grid, boxStartRow, boxStartCol, num) {
+  static usedInBox(grid, boxStartRow, boxStartCol, num) {
     for (let row = 0; row < 3; row++) {
       for (let col = 0; col < 3; col++) {
         if (
@@ -145,111 +196,9 @@ class JumpingStudent {
     return false;
   }
 
-  isSafe(grid, row, col, num) {
-    return !this.usedInRow(grid, row, num) &&
-      !this.usedInCol(grid, col, num) &&
-      !this.usedInBox(grid, row - row % 3, col - col % 3, num);
-  }
-
-  propagate_step(state) {
-    for (let i = 0; i < 9; i++) {
-      const row = state[i];
-      const values = row.filter(cell => !cell.length);
-
-      for (let j = 0; j < 9; j++) {
-        if (typeof state[i][j] === "string") {
-          state[i][j] = Number(state[i][j])
-        }
-        if (state[i][j].length) {
-          state[i][j] = this.arrays_subtraction(state[i][j], values);
-        }
-      }
-    }
-
-    for (let j = 0; j < 9; j++) {
-      const column = [];
-      for (let col = 0; col < 9; col++) {
-        column.push(state[col][j]);
-      }
-      const values = column.filter(cell => !cell.length);
-
-      for (let i = 0; i < 9; i++) {
-        if (state[i][j].length) {
-          state[i][j] = this.arrays_subtraction(state[i][j], values);
-        }
-      }
-    }
-
-    for (let x = 0; x < 3; x++) {
-      for (let y = 0; y < 3; y++) {
-        const values = [];
-
-        for (let i = 3 * x; i < 3 * x + 3; i++) {
-          for (let j = 3 * y; j < 3 * y + 3; j++) {
-            const cell = state[i][j];
-
-            if (!cell.length) {
-              values.push(cell);
-            }
-          }
-        }
-
-        for (let i = 3 * x; i < 3 * x + 3; i++) {
-          for (let j = 3 * y; j < 3 * y + 3; j++) {
-            if (state[i][j].length) {
-              state[i][j] = this.arrays_subtraction(state[i][j], values);
-            }
-          }
-        }
-      }
-    }
-
-    return this.solveSudoku(state);
-  }
-
-  clone(existingArray) {
-    let newObj = (existingArray instanceof Array) ? [] : {};
-    for (let i in existingArray) {
-      if (i === 'clone') continue;
-      if (existingArray[i] && typeof existingArray[i] === "object") {
-        newObj[i] = this.clone(existingArray[i]);
-      } else {
-        newObj[i] = existingArray[i]
-      }
-    }
-
-    return newObj;
-  }
-
-  arrays_subtraction(array1, array2) {
-    const newArray = [];
-
-    array1.forEach(element => {
-      const areBoth = array2.find(element2 => element2 === element);
-
-      if (!areBoth) {
-        newArray.push(element);
-      }
-    });
-
-    return newArray;
-  }
-
-  static showGrid(grid) {
-    console.log(grid);
+  static isSafe(grid, row, col, num) {
+    return !JumpingStudent.usedInRow(grid, row, num) &&
+      !JumpingStudent.usedInCol(grid, col, num) &&
+      !JumpingStudent.usedInBox(grid, row - row % 3, col - col % 3, num);
   }
 }
-
-document.addEventListener('DOMContentLoaded', () => {
-  document.getElementById('buttonOne').addEventListener('click', () => {
-    const numberOfSolve = Number(document.getElementById('sudoku-counter-input').value) === 0 ?
-      1
-      :
-      Number(document.getElementById('sudoku-counter-input').value)
-    ;
-
-    new JumpingStudent(DATA, numberOfSolve);
-
-    main(numberOfSolve);
-  });
-});
