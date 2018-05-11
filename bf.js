@@ -73,32 +73,10 @@ const isSafe = (grid, row, col, num) => {
     !usedInBox(grid, row - row % 3, col - col % 3, num);
 };
 
-const printGrid = (grid, elementId) => {
-  let table = '';
-  for (let row = 0; row < 9; row++) {
-    for (let col = 0; col < 9; col++) {
-      table += `${grid[row][col]} `;
-    }
-    table += '<br>';
-  }
-
-  document.getElementById(elementId).innerHTML = table;
-  console.log(grid);
-};
-
-const main = numberOfSolve => {
-  const grid = clone(DATA[0]);
+const main = (grid) => {
   if (solveSudoku(grid) === true) {
-    const startTime = performance.now();
     solveSudoku(grid);
-    const endTime = performance.now();
-
-    console.log('It took ' + (endTime - startTime) + ' ms.');
-    document.getElementById('result').textContent = 'It took ' + (endTime - startTime) + ' ms. (result in console (F12))';
-
-    printGrid(grid, 'outputGrid');
   } else {
     console.log('no solution');
   }
 };
-

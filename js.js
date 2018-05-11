@@ -1,6 +1,6 @@
 class JumpingStudent {
   constructor(grid, numberOfSolve) {
-    this.grid = grid[0];
+    this.grid = grid;
     this.numberOfSolve = numberOfSolve;
     this.result = [];
 
