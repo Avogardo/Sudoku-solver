@@ -21,6 +21,105 @@ h1 {
   justify-content: space-around;
 }
 
+.button {
+    background-color: #ffffff;
+    color: #000000;
+    padding: 12px;
+    font-size: 16px;
+    border: none;
+    border-radius: 3px;
+    margin-bottom: 15px;
+    cursor: pointer;
+    -webkit-box-shadow: 0 0 4px 0 rgba(0,0,0,0.75);
+    -moz-box-shadow: 0 0 4px 0 rgba(0,0,0,0.75);
+    box-shadow: 0 0 4px 0 rgba(0,0,0,0.75);
+}
+
+.button:hover {
+    transition: background-color 0.2s;
+}
+
+.button:focus {
+    outline: none;
+    -webkit-tap-highlight-color: rgba(0,0,0,0);
+}
+
+.small-button {
+    font-size: 13px;
+    padding: 10px;
+}
+
+.small-button:active {
+    background-color: #9a9596;
+}
+
+input[type="file"] {
+    display: none;
+}
+
+.import-button {
+    cursor: pointer;
+}
+
+.import-button:active {
+    outline: none;
+    background-color: #9a9596;
+    -webkit-tap-highlight-color: rgba(0,0,0,0);
+}
+
+#sudoku-counter-input {
+    padding: 11px;
+    margin: 8px;
+    border: 1px solid #cccccc;
+    border-radius: 3px;
+    transition: border-color 0.2s;
+}
+
+#sudoku-counter-input:focus {
+    border-color: #5E35B1;
+    outline: #5E35B1;
+    -webkit-tap-highlight-color: #5E35B1;
+}
+
+.loader-wrapper {
+    display: flex;
+    z-index: -1;
+    opacity: 0;
+    position: absolute;
+    width: 100%;
+    height: 100%;
+    top: 0;
+    left: 0;
+    justify-content: center;
+    align-items: center;
+    background-color: rgba(192,192,192,0.3);
+    transition: opacity 0.5s;
+}
+
+.loader {
+    border: 8px solid #ffffff;
+    border-radius: 50%;
+    border-top: 8px solid #3498db;
+    width: 60px;
+    height: 60px;
+    -webkit-animation: spin 2s linear infinite;
+    animation: spin 2s linear infinite;
+    transition: height 1s;
+}
+
+@-webkit-keyframes spin {
+    0% { -webkit-transform: rotate(0deg); }
+    100% { -webkit-transform: rotate(360deg); }
+}
+
+@keyframes spin {
+    0% { transform: rotate(0deg); }
+    100% { transform: rotate(360deg); }
+}
+
+/*********/
+/* MEDIA */
+/*********/
 @media (max-width: 665px)  {
   section {
     display: flex;
@@ -87,42 +186,11 @@ h1 {
     background-color: #9a9596;
   }
 
-  .small-button {
-    font-size: 13px;
-    padding: 10px;
-  }
 
-  .small-button:active {
-    background-color: #9a9596;
-  }
 
-    input[type="file"] {
-        display: none;
-    }
 
-    .import-button {
-        cursor: pointer;
-    }
 
-    .import-button:active {
-        outline: none;
-        background-color: #9a9596;
-        -webkit-tap-highlight-color: rgba(0,0,0,0);
-    }
 
-    #sudoku-counter-input {
-        padding: 11px;
-        margin: 8px;
-        border: 1px solid #cccccc;
-        border-radius: 3px;
-        transition: border-color 0.2s;
-    }
-
-    #sudoku-counter-input:focus {
-        border-color: #5E35B1;
-        outline: #5E35B1;;
-        -webkit-tap-highlight-color: #5E35B1;
-    }
 
     .sudoku-counter-input-wrapper {
         white-space: nowrap;
@@ -138,4 +206,9 @@ h1 {
         flex-direction: column;
         align-items: center;
     }
+}
+
+@media (max-width: 800px)  {
+
+
 }

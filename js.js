@@ -1,16 +1,31 @@
 class JumpingStudent {
-  constructor(grid) {
+  constructor(grid, numberOfSolve) {
     this.grid = grid[0];
-    this.state = this.read(this.grid);
+    this.numberOfSolve = numberOfSolve;
+    this.result = [];
 
-    const startTime = performance.now();
-    this.propagate_step();
-    const result = this.solveSudoku();
-    const endTime = performance.now();
+    this.updateLoader(true);
 
-    document.getElementById('result').textContent = endTime - startTime;
+    setTimeout(() => {
+      const startTime = performance.now();
+      for (let i = 1; i <= this.numberOfSolve; i++) {
+        if (i === this.numberOfSolve) {
+          this.result = this.read(this.grid);
+        } else {
+          this.read(this.grid);
+        }
+      }
+      const endTime = performance.now();
+      this.updateLoader(false);
 
-    JumpingStudent.showGrid(result);
+      document.getElementById('result').textContent = endTime - startTime;
+      JumpingStudent.showGrid(this.result);
+    }, 30);
+  }
+
+  updateLoader(isWorking) {
+    document.querySelector('.loader-wrapper').style.zIndex = isWorking ? 10 : -1;
+    document.querySelector('.loader-wrapper').style.opacity = isWorking ? 1 : 0;
   }
 
   read(grid) {
@@ -25,11 +40,10 @@ class JumpingStudent {
       }
     }
 
-    return state;
+    return this.propagate_step(state);
   }
 
-  solveSudoku() {
-    const {state} = this;
+  solveSudoku(state) {
     const l = [0, 0, 0, 0];
     const stateCopy = this.clone(state);
 
@@ -137,9 +151,7 @@ class JumpingStudent {
       !this.usedInBox(grid, row - row % 3, col - col % 3, num);
   }
 
-  propagate_step() {
-    const {state} = this;
-
+  propagate_step(state) {
     for (let i = 0; i < 9; i++) {
       const row = state[i];
       const values = row.filter(cell => !cell.length);
@@ -191,6 +203,8 @@ class JumpingStudent {
         }
       }
     }
+
+    return this.solveSudoku(state);
   }
 
   clone(existingArray) {
@@ -226,8 +240,16 @@ class JumpingStudent {
   }
 }
 
-document.addEventListener('DOMContentLoaded', function () {
+document.addEventListener('DOMContentLoaded', () => {
   document.getElementById('buttonOne').addEventListener('click', () => {
-    new JumpingStudent(DATA);
+    const numberOfSolve = Number(document.getElementById('sudoku-counter-input').value) === 0 ?
+      1
+      :
+      Number(document.getElementById('sudoku-counter-input').value)
+    ;
+
+// console.log(Number.isInteger(Number(document.getElementById('sudoku-counter-input').value)));
+// console.log(Number(document.getElementById('sudoku-counter-input').value));
+    new JumpingStudent(DATA, numberOfSolve);
   });
 });

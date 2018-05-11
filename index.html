@@ -23,7 +23,7 @@
                 </ul>
             </div>
 
-            <label for="file" class="dropdown-button import-button">
+            <label for="file" class="button import-button">
                 Import puzzle
             </label>
             <input id="file" type="file"/>
@@ -32,10 +32,12 @@
             <form class="sudoku-counter-input-form">
                 <label for="sudoku-counter-input">Type how many times solve sudoku</label>
                 <span class="sudoku-counter-input-wrapper">
-                    <input id="sudoku-counter-input" placeholder="e.g. 100">
-                    <input id="buttonOne" class="dropdown-button small-button" type="button" value="Execute">
+                    <input id="sudoku-counter-input" placeholder="default: 1">
+                    <input id="buttonOne" class="button small-button" type="button" value="Execute">
                 </span>
             </form>
+
+            <div class="loader-wrapper"><div class="loader"></div></div>
 
             <p>Result: It took <span id="result"></span> ms.</p>
             <div class="sudoku-container">
