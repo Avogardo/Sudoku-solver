@@ -22,15 +22,19 @@
                     <li>Link 3</li>
                 </ul>
             </div>
+
+            <label for="file-upload" class="dropdown-button import-button">
+                Custom Upload
+            </label>
+            <input id="file-upload" type="file"/>
         </nav>
         <div>
             <form>
                 <label for="sudoku-counter-input">Type how many times solve sudoku</label>
                 <input id="sudoku-counter-input" placeholder="e.g. 100">
-                <input id="buttonOne" class="dropdown-button small-button" type="submit" value="Execute">
+                <input id="file" class="dropdown-button small-button" type="submit" value="Execute">
             </form>
 
-            <input id="file" type="file" />
             <p>Result: <span id="result"></span></p>
             <div class="sudoku-container">
                 Input:
