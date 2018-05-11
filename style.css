@@ -25,13 +25,27 @@ h1 {
     align-items: center;
   }
 
-  .dropbtn {
-    background-color: #4CAF50;
-    color: white;
-    padding: 16px;
+  .dropdown-button {
+    background-color: #ffffff;
+    color: #000000;
+    padding: 12px;
     font-size: 16px;
     border: none;
+    border-radius: 3px;
+    margin-bottom: 15px;
     cursor: pointer;
+    -webkit-box-shadow: 0px 0px 4px 0px rgba(0,0,0,0.75);
+    -moz-box-shadow: 0px 0px 4px 0px rgba(0,0,0,0.75);
+    box-shadow: 0px 0px 4px 0px rgba(0,0,0,0.75);
+  }
+
+  .dropdown-button:hover {
+    transition: background-color 0.2s;
+  }
+
+  .dropdown-button:focus {
+    outline: none;
+    -webkit-tap-highlight-color: rgba(0,0,0,0);
   }
 
   .dropdown {
@@ -55,13 +69,15 @@ h1 {
     display: block;
   }
 
-  .dropdown-content a:hover {background-color: #f1f1f1}
+  .dropdown-content a:hover {
+    background-color: #f1f1f1
+  }
 
   .dropdown:hover .dropdown-content {
     display: block;
   }
 
-  .dropdown:hover .dropbtn {
-    background-color: #3e8e41;
+  .dropdown:hover .dropdown-button {
+    background-color: #9a9596;
   }
 }
