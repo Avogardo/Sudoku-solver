@@ -248,8 +248,8 @@ document.addEventListener('DOMContentLoaded', () => {
       Number(document.getElementById('sudoku-counter-input').value)
     ;
 
-// console.log(Number.isInteger(Number(document.getElementById('sudoku-counter-input').value)));
-// console.log(Number(document.getElementById('sudoku-counter-input').value));
     new JumpingStudent(DATA, numberOfSolve);
+
+    main(numberOfSolve);
   });
 });
