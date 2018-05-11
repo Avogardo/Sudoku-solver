@@ -82,4 +82,13 @@ h1 {
   .dropdown:hover .dropdown-button {
     background-color: #9a9596;
   }
+
+  .small-button {
+    font-size: 13px;
+    padding: 10px;
+  }
+
+  .small-button:active {
+    background-color: #9a9596;
+  }
 }

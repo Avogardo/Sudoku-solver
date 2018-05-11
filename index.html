@@ -24,7 +24,12 @@
             </div>
         </nav>
         <div>
-            <input id="buttonOne" type="button" value="nice button">
+            <form>
+                <label for="sudoku-counter-input">Type how many times solve sudoku</label>
+                <input id="sudoku-counter-input" placeholder="e.g. 100">
+                <input id="buttonOne" class="dropdown-button small-button" type="submit" value="Execute">
+            </form>
+
             <input id="file" type="file" />
             <p>Result: <span id="result"></span></p>
             <div class="sudoku-container">
