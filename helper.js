@@ -47,3 +47,16 @@ const printGrid = (grid, elementId) => {
   document.getElementById(elementId).innerHTML = table;
   console.log(grid);
 };
+
+const showToaster = (type, message) => {
+  const toaster = document.querySelector('.toaster');
+  toaster.style.backgroundColor = type === 'success' ? '#4cae4c' : '#d9534f';
+  toaster.textContent = message;
+  toaster.style.top = '12px';
+  toaster.style.opacity = '1';
+
+  setTimeout(() => {
+    toaster.style.top = '-60px';
+    toaster.style.opacity = '0';
+    }, 2500);
+};

@@ -117,6 +117,27 @@ input[type="file"] {
     100% { transform: rotate(360deg); }
 }
 
+.toaster {
+    position: absolute;
+    display: flex;
+    z-index: 9;
+    top: -60px;
+    right: 12px;
+    background-color: #4cae4c;
+    color: #ffffff;
+    padding: 15px;
+    border-radius: 5px;
+    width: 100px;
+    align-items: center;
+    justify-content: center;
+    opacity: 0;
+    -webkit-transition: top 1s, opacity 1s;
+    -moz-transition: top 1s, opacity 1s;
+    -o-transition: top 1s, opacity 1s;
+    transition: top 1s, opacity 1s;
+    font-size: 24px;
+}
+
 /*********/
 /* MEDIA */
 /*********/

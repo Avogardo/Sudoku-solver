@@ -14,6 +14,8 @@ document.addEventListener('DOMContentLoaded', () => {
       console.log('Backtracking took ' + (endTime - startTime) + ' ms.');
 
       updateLoader();
+
+      showToaster('success', 'Success');
     }, 30);
   });
 });
