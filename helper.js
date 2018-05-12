@@ -40,10 +40,12 @@ const showGrid = (runTime, algorithm, grid) => {
     case 'back':
       document.getElementById('result-backtracking').textContent = `${runTime}`;
       break;
+    case 'crook':
+      document.getElementById('result-crook').textContent = `${runTime}`;
+      break;
     default:
         break;
   }
-
 };
 
 const printGrid = (grid, elementId) => {
@@ -70,4 +72,18 @@ const showToaster = (type, message) => {
     toaster.style.top = '-60px';
     toaster.style.opacity = '0';
     }, type === 'success' ? 2500 : 3500);
+};
+
+const onChange = (event) => {
+  const reader = new FileReader();
+  reader.onload = onReaderLoad;
+  reader.readAsText(event.target.files[0]);
+};
+
+onReaderLoad = (event) => {
+  const obj = JSON.parse(event.target.result);
+  console.log(obj.grid);
+
+  const json = require('./data.json');
+  console.log(json);
 };

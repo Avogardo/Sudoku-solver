@@ -14,12 +14,14 @@ document.addEventListener('DOMContentLoaded', () => {
         main(DATA[0], numberOfSolve);
         const endTime = performance.now();
         showGrid((endTime - startTime), 'back');
-        console.log('Backtracking took ' + (endTime - startTime) + ' ms.');
+
+        const startTimeCrook = performance.now();
+        crook(DATA[0], numberOfSolve);
+        const endTimeCrook = performance.now();
+        showGrid((endTimeCrook - startTimeCrook), 'crook');
 
         updateLoader();
-
         document.querySelector('.results').style.display = 'block';
-
         showToaster('success', 'Success');
       } catch (error) {
         console.log(error);
@@ -28,4 +30,6 @@ document.addEventListener('DOMContentLoaded', () => {
       }
     }, 30);
   });
+
+  document.getElementById('file').addEventListener('change', onChange);
 });

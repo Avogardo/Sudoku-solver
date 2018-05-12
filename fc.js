@@ -1,29 +1,5 @@
 N = 9;
-grid = [
-  [5, 1, 7, 6, 0, 0, 0, 3, 4],
-  [2, 8, 9, 0, 0, 4, 0, 0, 0],
-  [3, 4, 6, 2, 0, 5, 0, 9, 0],
-  [6, 0, 2, 0, 0, 0, 0, 1, 0],
-  [0, 3, 8, 0, 0, 6, 0, 4, 7],
-  [0, 0, 0, 0, 0, 0, 0, 0, 0],
-  [0, 9, 0, 0, 0, 0, 0, 7, 8],
-  [7, 0, 3, 4, 0, 0, 5, 6, 0],
-  [0, 0, 0, 0, 0, 0, 0, 0, 0],
-];
-
 result = [];
-
-const printGrid = (grid, elementId) => {
-  let table = '';
-  for (let row = 0; row < 9; row++) {
-    for (let col = 0; col < 9; col++) {
-      table += `${grid[row][col]} `;
-    }
-    table += '<br>';
-  }
-
-  document.getElementById(elementId).innerHTML = table;
-};
 
 const read = grid => {
   const state = clone(grid);
@@ -171,34 +147,17 @@ const solve = state => {
   }
 };
 
-const main = () => {
-  const startTime = performance.now();
-  const state = read(grid);
-  solve(state);
-  const endTime = performance.now();
+const crook = (puzzle, numberOfSolve) => {
+  for (let i = 1; i <= numberOfSolve; i++) {
+    const grid = clone(puzzle);
 
-  document.getElementById('result').textContent = 'It took ' + (endTime - startTime) + ' ms. (result in console (F12))';
-
-  printGrid(result, 'outputGrid');
-};
-
-document.addEventListener('DOMContentLoaded', function () {
-  document.getElementById('buttonOne').addEventListener('click', main);
-  document.getElementById('file').addEventListener('change', onChange);
-  console.log(DATA)
-});
-
-
-const onChange = (event) => {
-  const reader = new FileReader();
-  reader.onload = onReaderLoad;
-  reader.readAsText(event.target.files[0]);
-};
-
-onReaderLoad = (event) => {
-  const obj = JSON.parse(event.target.result);
-  console.log(obj.grid);
-
-  const json = require('./data.json');
-  console.log(json);
+    if (i === numberOfSolve) {
+        const state = read(grid);
+        solve(state);
+        console.log('fc', state)
+    } else {
+      const state = read(grid);
+      solve(state);
+    }
+  }
 };
