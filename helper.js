@@ -30,8 +30,9 @@ const updateLoader = isWorking => {
   document.querySelector('.loader-wrapper').style.opacity = isWorking ? 1 : 0;
 };
 
-const showGrid = grid => {
+const showGrid = (grid, runTime) => {
   console.log(grid);
+  document.getElementById('result').textContent = `${runTime}`;
 };
 
 const printGrid = (grid, elementId) => {

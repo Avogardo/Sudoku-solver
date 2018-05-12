@@ -4,23 +4,17 @@ class JumpingStudent {
     this.numberOfSolve = numberOfSolve;
     this.result = [];
 
-    updateLoader(true);
-
-    setTimeout(() => {
-      const startTime = performance.now();
-      for (let i = 1; i <= this.numberOfSolve; i++) {
-        if (i === this.numberOfSolve) {
-          this.result = this.read(this.grid);
-        } else {
-          this.read(this.grid);
-        }
+    const startTime = performance.now();
+    for (let i = 1; i <= this.numberOfSolve; i++) {
+      if (i === this.numberOfSolve) {
+        this.result = this.read(this.grid);
+      } else {
+        this.read(this.grid);
       }
-      const endTime = performance.now();
-      updateLoader();
+    }
+    const endTime = performance.now();
 
-      document.getElementById('result').textContent = `${endTime - startTime}`;
-      showGrid(this.result);
-    }, 30);
+    showGrid(this.result, (endTime - startTime));
   }
 
   read(grid) {

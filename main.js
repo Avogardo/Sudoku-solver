@@ -1,21 +1,19 @@
 document.addEventListener('DOMContentLoaded', () => {
-  printGrid(DATA[0], 'inputGrid');
-
   document.getElementById('buttonOne').addEventListener('click', () => {
-    const sudokuCounterInputValue = Number(document.getElementById('sudoku-counter-input').value);
-    const numberOfSolve =  sudokuCounterInputValue === 0 ? 1 : sudokuCounterInputValue;
+    updateLoader(true);
 
-    let grid = clone(DATA[0]);
+    setTimeout(() => {
+      const sudokuCounterInputValue = Number(document.getElementById('sudoku-counter-input').value);
+      const numberOfSolve =  sudokuCounterInputValue === 0 ? 1 : sudokuCounterInputValue;
 
-    new JumpingStudent(grid, numberOfSolve);
+      new JumpingStudent(DATA[0], numberOfSolve);
 
-    grid = clone(DATA[0]);
+      const startTime = performance.now();
+      main(DATA[0], numberOfSolve);
+      const endTime = performance.now();
+      console.log('Backtracking took ' + (endTime - startTime) + ' ms.');
 
-    const startTime = performance.now();
-    main(grid, numberOfSolve);
-    const endTime = performance.now();
-    console.log('It took ' + (endTime - startTime) + ' ms.');
-    // document.getElementById('result').textContent = 'It took ' + (endTime - startTime) + ' ms. (result in console (F12))';
-    printGrid(grid, 'outputGrid');
+      updateLoader();
+    }, 30);
   });
 });

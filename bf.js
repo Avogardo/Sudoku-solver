@@ -73,10 +73,23 @@ const isSafe = (grid, row, col, num) => {
     !usedInBox(grid, row - row % 3, col - col % 3, num);
 };
 
-const main = (grid) => {
-  if (solveSudoku(grid) === true) {
-    solveSudoku(grid);
-  } else {
-    console.log('no solution');
+const main = (grid, numberOfSolve) => {
+  for (let i = 1; i <= numberOfSolve; i++) {
+    const state = clone(grid);
+
+    if (i === numberOfSolve) {
+      if (solveSudoku(state) === true) {
+        solveSudoku(state);
+        printGrid(state, 'outputGrid');
+      } else {
+        console.log('no solution');
+      }
+    } else {
+      if (solveSudoku(state) === true) {
+        solveSudoku(state);
+      } else {
+        console.log('no solution');
+      }
+    }
   }
 };
