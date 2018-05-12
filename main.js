@@ -13,6 +13,10 @@ document.addEventListener('DOMContentLoaded', () => {
       return;
     }
 
+    allResults.crook = [];
+    allResults.backtracking = [];
+    allResults.jumping = [];
+
     updateLoader(true);
     console.log('selectedPuzzle', selectedPuzzle);
     setTimeout(() => {
