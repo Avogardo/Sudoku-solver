@@ -148,7 +148,10 @@ const solve = state => {
 };
 
 const crook = (puzzle, numberOfSolve) => {
+  allResults.crook.push('Crook');
+
   for (let i = 1; i <= numberOfSolve; i++) {
+    let startTime = performance.now();
     const grid = clone(puzzle);
 
     if (i === numberOfSolve) {
@@ -159,5 +162,8 @@ const crook = (puzzle, numberOfSolve) => {
       const state = read(grid);
       solve(state);
     }
+
+    let endTime = performance.now();
+    allResults.crook.push(endTime - startTime);
   }
 };

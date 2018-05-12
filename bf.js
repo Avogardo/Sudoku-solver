@@ -74,7 +74,10 @@ const isSafe = (grid, row, col, num) => {
 };
 
 const main = (grid, numberOfSolve) => {
+  allResults.backtracking.push('Backtracking');
+
   for (let i = 1; i <= numberOfSolve; i++) {
+    let startTime = performance.now();
     const state = clone(grid);
 
     if (i === numberOfSolve) {
@@ -91,5 +94,8 @@ const main = (grid, numberOfSolve) => {
         console.log('no solution');
       }
     }
+
+    let endTime = performance.now();
+    allResults.backtracking.push(endTime - startTime);
   }
 };
