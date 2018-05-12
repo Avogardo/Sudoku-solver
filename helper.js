@@ -69,5 +69,5 @@ const showToaster = (type, message) => {
   setTimeout(() => {
     toaster.style.top = '-60px';
     toaster.style.opacity = '0';
-    }, 2500);
+    }, type === 'success' ? 2500 : 3500);
 };
