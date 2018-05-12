@@ -1,4 +1,5 @@
 document.addEventListener('DOMContentLoaded', () => {
+  printGrid(DATA[0], 'inputGrid');
   document.getElementById('buttonOne').addEventListener('click', () => {
     updateLoader(true);
 
@@ -12,9 +13,12 @@ document.addEventListener('DOMContentLoaded', () => {
         const startTime = performance.now();
         main(DATA[0], numberOfSolve);
         const endTime = performance.now();
+        showGrid((endTime - startTime), 'back');
         console.log('Backtracking took ' + (endTime - startTime) + ' ms.');
 
         updateLoader();
+
+        document.querySelector('.results').style.display = 'block';
 
         showToaster('success', 'Success');
       } catch (error) {

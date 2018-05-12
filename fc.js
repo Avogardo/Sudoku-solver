@@ -172,8 +172,6 @@ const solve = state => {
 };
 
 const main = () => {
-  printGrid(grid, 'inputGrid');
-
   const startTime = performance.now();
   const state = read(grid);
   solve(state);

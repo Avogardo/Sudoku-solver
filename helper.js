@@ -30,9 +30,20 @@ const updateLoader = isWorking => {
   document.querySelector('.loader-wrapper').style.opacity = isWorking ? 1 : 0;
 };
 
-const showGrid = (grid, runTime) => {
+const showGrid = (runTime, algorithm, grid) => {
   console.log(grid);
-  document.getElementById('result').textContent = `${runTime}`;
+
+  switch (algorithm) {
+    case 'jump':
+      document.getElementById('result').textContent = `${runTime}`;
+      break;
+    case 'back':
+      document.getElementById('result-backtracking').textContent = `${runTime}`;
+      break;
+    default:
+        break;
+  }
+
 };
 
 const printGrid = (grid, elementId) => {

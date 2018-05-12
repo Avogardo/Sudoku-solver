@@ -14,7 +14,7 @@ class JumpingStudent {
     }
     const endTime = performance.now();
 
-    showGrid(this.result, (endTime - startTime));
+    showGrid((endTime - startTime), 'jump', this.result);
   }
 
   read(grid) {

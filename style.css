@@ -138,6 +138,10 @@ input[type="file"] {
     font-size: 24px;
 }
 
+.results {
+    display: none;
+}
+
 /*********/
 /* MEDIA */
 /*********/
