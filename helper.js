@@ -136,4 +136,7 @@ const exportToCsv = () => {
     console.log(error);
     showToaster('error', error);
   }
+  allResults.crook = [];
+  allResults.backtracking = [];
+  allResults.jumping = [];
 };

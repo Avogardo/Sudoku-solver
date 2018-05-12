@@ -142,23 +142,7 @@ input[type="file"] {
     display: none;
 }
 
-/*********/
-/* MEDIA */
-/*********/
-@media (max-width: 665px)  {
-  section {
-    display: flex;
-    flex-direction: column;
-    align-items: center;
-  }
-
-    nav {
-        display: flex;
-        width: 100%;
-        justify-content: space-evenly;
-    }
-
-  .dropdown-button {
+.dropdown-button {
     background-color: #ffffff;
     color: #000000;
     padding: 12px;
@@ -170,18 +154,18 @@ input[type="file"] {
     -webkit-box-shadow: 0 0 4px 0 rgba(0,0,0,0.75);
     -moz-box-shadow: 0 0 4px 0 rgba(0,0,0,0.75);
     box-shadow: 0 0 4px 0 rgba(0,0,0,0.75);
-  }
+}
 
-  .dropdown-button:hover {
+.dropdown-button:hover {
     transition: background-color 0.2s;
-  }
+}
 
-  .dropdown-button:focus {
+.dropdown-button:focus {
     outline: none;
     -webkit-tap-highlight-color: rgba(0,0,0,0);
-  }
+}
 
-  .dropdown-content {
+.dropdown-content {
     display: none;
     position: absolute;
     background-color: #f9f9f9;
@@ -190,33 +174,51 @@ input[type="file"] {
     z-index: 1;
     padding: 0;
     margin-top: -10px;
-  }
+}
 
-    .dropdown:hover .dropdown-content {
-        display: block;
-    }
+.dropdown:hover .dropdown-content {
+    display: block;
+}
 
-  .dropdown-content li {
+.dropdown-content li {
     color: black;
     padding: 12px 16px;
     text-decoration: none;
     display: flex;
     justify-content: center;
-  }
+}
 
-  .dropdown-content li:hover {
+.dropdown-content li:hover {
     background-color: #f1f1f1
-  }
+}
 
-  .dropdown:hover .dropdown-button {
+.dropdown:hover .dropdown-button {
     background-color: #9a9596;
-  }
+}
 
+nav {
+    display: flex;
+}
 
+.import-button {
+    margin-left: 15px;
+}
 
+/*********/
+/* MEDIA */
+/*********/
+@media (max-width: 665px)  {
+    section {
+        display: flex;
+        flex-direction: column;
+        align-items: center;
+    }
 
-
-
+    nav {
+        display: flex;
+        width: 100%;
+        justify-content: space-evenly;
+    }
 
     .sudoku-counter-input-wrapper {
         white-space: nowrap;
@@ -232,9 +234,8 @@ input[type="file"] {
         flex-direction: column;
         align-items: center;
     }
-}
 
-@media (max-width: 800px)  {
-
-
+    .import-button {
+        margin-left: 0;
+    }
 }
