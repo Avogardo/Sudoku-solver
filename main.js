@@ -1,8 +1,10 @@
 document.addEventListener('DOMContentLoaded', () => {
   printGrid(DATA[0], 'inputGrid');
+  getPuzzles();
+
   document.getElementById('buttonOne').addEventListener('click', () => {
     updateLoader(true);
-
+    console.log('selectedPuzzle', selectedPuzzle);
     setTimeout(() => {
       const sudokuCounterInputValue = Number(document.getElementById('sudoku-counter-input').value);
       const numberOfSolve =  sudokuCounterInputValue === 0 ? 1 : sudokuCounterInputValue;

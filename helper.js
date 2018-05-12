@@ -1,3 +1,5 @@
+let selectedPuzzle;
+
 const clone = existingArray => {
   let newObj = (existingArray instanceof Array) ? [] : {};
   for (i in existingArray) {
@@ -87,3 +89,16 @@ onReaderLoad = (event) => {
   const json = require('./data.json');
   console.log(json);
 };
+
+const getPuzzles = () => {
+  const puzzles = DATA;
+
+  let puzzleList = "";
+  puzzles.forEach((puzzle, index) => {
+    puzzleList += `<li onclick="setPuzzle(this, '${index}')">Puzzle ${index}</li>`;
+  });
+
+  document.querySelector('.dropdown-content').innerHTML = puzzleList;
+};
+
+const setPuzzle = (element, index) => {console.log('d', index); selectedPuzzle = DATA[Number(index)]};
