@@ -28,7 +28,7 @@ document.addEventListener('DOMContentLoaded', () => {
 
         updateLoader();
         document.querySelector('.results').style.display = 'block';
-        showToaster('success', 'Success');
+        showToaster('success', 'Succeed');
       } catch (error) {
         console.log(error);
         updateLoader();
@@ -38,4 +38,6 @@ document.addEventListener('DOMContentLoaded', () => {
   });
 
   document.getElementById('file').addEventListener('change', onChange);
+
+  document.getElementById('export-button').addEventListener('click', exportToCsv);
 });

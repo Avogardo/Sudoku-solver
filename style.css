@@ -192,6 +192,10 @@ input[type="file"] {
     margin-top: -10px;
   }
 
+    .dropdown:hover .dropdown-content {
+        display: block;
+    }
+
   .dropdown-content li {
     color: black;
     padding: 12px 16px;
@@ -202,10 +206,6 @@ input[type="file"] {
 
   .dropdown-content li:hover {
     background-color: #f1f1f1
-  }
-
-  .dropdown:hover .dropdown-content {
-    display: block;
   }
 
   .dropdown:hover .dropdown-button {

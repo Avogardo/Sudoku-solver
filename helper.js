@@ -105,3 +105,33 @@ const setPuzzle = (element, index) => {
   selectedPuzzle = DATA[Number(index)];
   printGrid(selectedPuzzle, 'inputGrid');
 };
+
+const exportToCsv = () => {
+  try {
+    const Results = [
+      ["Jumping Student", "Backtracking", "Crook"],
+      [50, 100, 500],
+      [-100, 20, 100],
+    ];
+
+    let CsvString = '"sep=,"\r\n';
+    Results.forEach((RowItem) => {
+      RowItem.forEach((ColItem) => {
+        CsvString += ColItem + ',';
+      });
+      CsvString += "\r\n";
+    });
+
+    CsvString = "data:application/csv," + encodeURIComponent(CsvString);
+    const x = document.createElement("A");
+    x.setAttribute("href", CsvString );
+    x.setAttribute("download","sudoku results.csv");
+    document.body.appendChild(x);
+    x.click();
+
+    showToaster('success', 'Export succeed');
+  } catch (error) {
+    console.log(error);
+    showToaster('error', error);
+  }
+};
