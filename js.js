@@ -3,14 +3,18 @@ class JumpingStudent {
     this.grid = grid;
     this.numberOfSolve = numberOfSolve;
     this.result = [];
+    this.arrayOfResults = ['Jumping Student'];
 
     const startTime = performance.now();
     for (let i = 1; i <= this.numberOfSolve; i++) {
+      let startTime = performance.now();
       if (i === this.numberOfSolve) {
         this.result = this.read(this.grid);
       } else {
         this.read(this.grid);
       }
+      let endTime = performance.now();
+      this.arrayOfResults.push(endTime - startTime);
     }
     const endTime = performance.now();
 

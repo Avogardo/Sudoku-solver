@@ -108,11 +108,13 @@ const setPuzzle = (element, index) => {
 
 const exportToCsv = () => {
   try {
-    const Results = [
-      ["Jumping Student", "Backtracking", "Crook"],
-      [50, 100, 500],
-      [-100, 20, 100],
+    let Results = [
+      allResults.jumping,
+      allResults.backtracking,
+      allResults.crook,
     ];
+
+    Results = Results[0].map((col, i) => Results.map(row => row[i]));
 
     let CsvString = '"sep=,"\r\n';
     Results.forEach((RowItem) => {

@@ -1,3 +1,9 @@
+const allResults = {
+  jumping: [],
+  backtracking: [],
+  crook: [],
+};
+
 document.addEventListener('DOMContentLoaded', () => {
   getPuzzles();
 
@@ -14,7 +20,8 @@ document.addEventListener('DOMContentLoaded', () => {
       const numberOfSolve =  sudokuCounterInputValue === 0 ? 1 : sudokuCounterInputValue;
 
       try {
-        new JumpingStudent(selectedPuzzle, numberOfSolve);
+        const a = new JumpingStudent(selectedPuzzle, numberOfSolve);
+        allResults.jumping = a.arrayOfResults;
 
         const startTime = performance.now();
         main(selectedPuzzle, numberOfSolve);
