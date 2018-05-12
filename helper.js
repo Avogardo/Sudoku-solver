@@ -101,4 +101,7 @@ const getPuzzles = () => {
   document.querySelector('.dropdown-content').innerHTML = puzzleList;
 };
 
-const setPuzzle = (element, index) => {console.log('d', index); selectedPuzzle = DATA[Number(index)]};
+const setPuzzle = (element, index) => {
+  selectedPuzzle = DATA[Number(index)];
+  printGrid(selectedPuzzle, 'inputGrid');
+};

@@ -1,8 +1,12 @@
 document.addEventListener('DOMContentLoaded', () => {
-  printGrid(DATA[0], 'inputGrid');
   getPuzzles();
 
   document.getElementById('buttonOne').addEventListener('click', () => {
+    if (!selectedPuzzle) {
+      showToaster('error', 'No puzzle selected');
+      return;
+    }
+
     updateLoader(true);
     console.log('selectedPuzzle', selectedPuzzle);
     setTimeout(() => {
@@ -10,15 +14,15 @@ document.addEventListener('DOMContentLoaded', () => {
       const numberOfSolve =  sudokuCounterInputValue === 0 ? 1 : sudokuCounterInputValue;
 
       try {
-        new JumpingStudent(DATA[0], numberOfSolve);
+        new JumpingStudent(selectedPuzzle, numberOfSolve);
 
         const startTime = performance.now();
-        main(DATA[0], numberOfSolve);
+        main(selectedPuzzle, numberOfSolve);
         const endTime = performance.now();
         showGrid((endTime - startTime), 'back');
 
         const startTimeCrook = performance.now();
-        crook(DATA[0], numberOfSolve);
+        crook(selectedPuzzle, numberOfSolve);
         const endTimeCrook = performance.now();
         showGrid((endTimeCrook - startTimeCrook), 'crook');
 
