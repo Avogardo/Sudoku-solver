@@ -123,6 +123,7 @@ class JumpingStudent {
 
     if (l[2] > 2) {
       l[2] = 0;
+      l[3] = l[3] + 1;
     }
 
     if (l[3] > 2) {
@@ -146,8 +147,7 @@ class JumpingStudent {
 
           l[0] = shortest.i;
           l[1] = shortest.j;
-          l[3] = x + 1;
-          l[4] = y + 1;
+          l[2] = x + 1;
           square = [];
           return true;
         }
