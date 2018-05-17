@@ -1,5 +1,6 @@
 N = 9;
 result = [];
+crookCounter = 0;
 
 const read = grid => {
   const state = clone(grid);
@@ -37,6 +38,7 @@ const propagate_step = state => {
     for (let j = 0; j < 9; j++) {
       if (state[i][j].length) {
         state[i][j] = arrays_subtraction(state[i][j], values);
+        crookCounter++;
         if (state[i][j].length === 1) {
           state[i][j] = state[i][j].pop();
           new_units = true;
@@ -57,7 +59,7 @@ const propagate_step = state => {
     for (let i = 0; i < 9; i++) {
       if (state[i][j].length) {
         state[i][j] = arrays_subtraction(state[i][j], values);
-
+        crookCounter++;
         if (state[i][j].length === 1) {
           state[i][j] = state[i][j].pop();
           new_units = true;
@@ -86,7 +88,7 @@ const propagate_step = state => {
         for (let j = 3 * y; j < 3 * y + 3; j++) {
           if (state[i][j].length) {
             state[i][j] = arrays_subtraction(state[i][j], values);
-
+            crookCounter++;
             if (state[i][j].length === 1) {
               state[i][j] = state[i][j].pop();
               new_units = true;
@@ -104,7 +106,7 @@ const propagate_step = state => {
 
 const propagate = state => {
   while (true) {
-    const {solvable, new_unit} = propagate_step(state);
+    const { solvable, new_unit } = propagate_step(state);
 
     if (!solvable) {
       return false;

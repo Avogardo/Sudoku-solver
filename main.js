@@ -30,15 +30,16 @@ document.addEventListener('DOMContentLoaded', () => {
         const startTime = performance.now();
         main(selectedPuzzle, numberOfSolve);
         const endTime = performance.now();
-        showGrid((endTime - startTime), 'back');
+        showGrid((endTime - startTime), 'back', backTrackingCounter, backTrackingCounter);
 
         const startTimeCrook = performance.now();
         crook(selectedPuzzle, numberOfSolve);
         const endTimeCrook = performance.now();
-        showGrid((endTimeCrook - startTimeCrook), 'crook');
+        showGrid((endTimeCrook - startTimeCrook), 'crook', crookCounter, crookCounter);
 
         updateLoader();
         document.querySelector('.results').style.display = 'block';
+        console.log(crookCounter);
         showToaster('success', 'Succeed');
       } catch (error) {
         console.log(error);

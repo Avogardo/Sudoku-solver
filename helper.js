@@ -32,18 +32,18 @@ const updateLoader = isWorking => {
   document.querySelector('.loader-wrapper').style.opacity = isWorking ? 1 : 0;
 };
 
-const showGrid = (runTime, algorithm, grid) => {
+const showGrid = (runTime, algorithm, grid, insertions) => {
   console.log(grid);
 
   switch (algorithm) {
     case 'jump':
-      document.getElementById('result').textContent = `${runTime}`;
+      document.getElementById('result').textContent = `It took ${runTime}ms. Insertions: ${insertions}`;
       break;
     case 'back':
-      document.getElementById('result-backtracking').textContent = `${runTime}`;
+      document.getElementById('result-backtracking').textContent = `It took ${runTime}ms. Insertions: ${insertions}`;
       break;
     case 'crook':
-      document.getElementById('result-crook').textContent = `${runTime}`;
+      document.getElementById('result-crook').textContent = `It took ${runTime}ms. Insertions: ${insertions}`;
       break;
     default:
         break;

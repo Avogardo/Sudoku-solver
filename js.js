@@ -4,6 +4,7 @@ class JumpingStudent {
     this.numberOfSolve = numberOfSolve;
     this.result = [];
     this.arrayOfResults = ['Jumping Student'];
+    this.counter = 0;
 
     const startTime = performance.now();
     for (let i = 1; i <= this.numberOfSolve; i++) {
@@ -18,7 +19,7 @@ class JumpingStudent {
     }
     const endTime = performance.now();
 
-    showGrid((endTime - startTime), 'jump', this.result);
+    showGrid((endTime - startTime), 'jump', this.result, this.counter, this.counter);
   }
 
   read(grid) {
@@ -50,7 +51,7 @@ class JumpingStudent {
     for (let num of stateCopy[row][col]) {
       if (JumpingStudent.isSafe(state, row, col, num)) {
         state[row][col] = num;
-
+        this.counter++;
         if (this.solveSudoku(state)) {
           return state;
         }
@@ -72,6 +73,7 @@ class JumpingStudent {
           state[i][j] = Number(state[i][j])
         }
         if (state[i][j].length) {
+          this.counter++;
           state[i][j] = arrays_subtraction(state[i][j], values);
         }
       }
@@ -86,6 +88,7 @@ class JumpingStudent {
 
       for (let i = 0; i < 9; i++) {
         if (state[i][j].length) {
+          this.counter++;
           state[i][j] = arrays_subtraction(state[i][j], values);
         }
       }
@@ -108,6 +111,7 @@ class JumpingStudent {
         for (let i = 3 * x; i < 3 * x + 3; i++) {
           for (let j = 3 * y; j < 3 * y + 3; j++) {
             if (state[i][j].length) {
+              this.counter++;
               state[i][j] = arrays_subtraction(state[i][j], values);
             }
           }

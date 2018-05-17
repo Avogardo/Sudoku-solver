@@ -1,3 +1,5 @@
+backTrackingCounter = 0;
+
 const solveSudoku = (grid) => {
   const l = [0, 0];
 
@@ -11,7 +13,7 @@ const solveSudoku = (grid) => {
   for (let num = 1; num <= 9; num++) {
     if (isSafe(grid, row, col, num)) {
       grid[row][col] = num;
-
+      backTrackingCounter++;
       if (solveSudoku(grid)) {
         return true;
       }
