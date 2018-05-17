@@ -40,6 +40,7 @@ document.addEventListener('DOMContentLoaded', () => {
         updateLoader();
         document.querySelector('.results').style.display = 'block';
         console.log(crookCounter);
+        clearCounters();
         showToaster('success', 'Succeed');
       } catch (error) {
         console.log(error);

@@ -137,3 +137,8 @@ const exportToCsv = () => {
     showToaster('error', error);
   }
 };
+
+const clearCounters = () => {
+  crookCounter = 0;
+  backTrackingCounter = 0;
+};
