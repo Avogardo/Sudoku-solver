@@ -95,7 +95,7 @@ const getPuzzles = () => {
 
   let puzzleList = "";
   puzzles.forEach((puzzle, index) => {
-    puzzleList += `<li onclick="setPuzzle(this, '${index}')">Puzzle ${index}</li>`;
+    puzzleList += `<li onclick="setPuzzle(this, '${index}')">Puzzle ${ index + 1 }</li>`;
   });
 
   document.querySelector('.dropdown-content').innerHTML = puzzleList;
