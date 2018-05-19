@@ -33,7 +33,7 @@ const updateLoader = isWorking => {
 };
 
 const showGrid = (runTime, algorithm, grid, insertions) => {
-  console.log(grid);
+  console.log(algorithm, grid);
 
   switch (algorithm) {
     case 'jump':
@@ -60,7 +60,6 @@ const printGrid = (grid, elementId) => {
   }
 
   document.getElementById(elementId).innerHTML = table;
-  console.log(grid);
 };
 
 const showToaster = (type, message) => {

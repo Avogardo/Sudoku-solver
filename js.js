@@ -188,7 +188,7 @@ class JumpingStudent {
       for (let col = 0; col < 3; col++) {
         if (
           !Array.isArray(grid[row + boxStartRow][col + boxStartCol]) &&
-          grid[row + boxStartRow][col + boxStartCol] === num === num
+          grid[row + boxStartRow][col + boxStartCol] === num
         ) {
           return true;
         }
