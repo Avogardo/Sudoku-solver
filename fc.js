@@ -33,10 +33,10 @@ const propagate_step = state => {
 
   for (let i = 0; i < 9; i++) {
     const row = state[i];
-    const values = row.filter(cell => !cell.length);
+    const values = row.filter(cell => !Array.isArray(cell));
 
     for (let j = 0; j < 9; j++) {
-      if (state[i][j].length) {
+      if (Array.isArray(state[i][j])) {
         state[i][j] = arrays_subtraction(state[i][j], values);
         crookCounter++;
         if (state[i][j].length === 1) {
@@ -54,10 +54,10 @@ const propagate_step = state => {
     for (let col = 0; col < 9; col++) {
       column.push(state[col][j]);
     }
-    const values = column.filter(cell => !cell.length);
+    const values = column.filter(cell => Array.isArray(cell));
 
     for (let i = 0; i < 9; i++) {
-      if (state[i][j].length) {
+      if (Array.isArray(state[i][j])) {
         state[i][j] = arrays_subtraction(state[i][j], values);
         crookCounter++;
         if (state[i][j].length === 1) {
@@ -78,7 +78,7 @@ const propagate_step = state => {
         for (let j = 3 * y; j < 3 * y + 3; j++) {
           const cell = state[i][j];
 
-          if (!cell.length) {
+          if (!Array.isArray(cell)) {
             values.push(cell);
           }
         }
@@ -86,7 +86,7 @@ const propagate_step = state => {
 
       for (let i = 3 * x; i < 3 * x + 3; i++) {
         for (let j = 3 * y; j < 3 * y + 3; j++) {
-          if (state[i][j].length) {
+          if (Array.isArray(state[i][j])) {
             state[i][j] = arrays_subtraction(state[i][j], values);
             crookCounter++;
             if (state[i][j].length === 1) {
@@ -113,6 +113,7 @@ const propagate = state => {
     }
     if (!new_unit) {
       result = clone(state);
+      console.log(1, state);
       return true;
     }
   }

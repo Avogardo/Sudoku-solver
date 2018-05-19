@@ -88,6 +88,7 @@ const main = (grid, numberOfSolve) => {
         printGrid(state, 'outputGrid');
       } else {
         console.log('no solution');
+        document.getElementById('result-backtracking').textContent = `no solution`;
       }
     } else {
       if (solveSudoku(state) === true) {
