@@ -46,7 +46,7 @@ const showGrid = (runTime, algorithm, grid, insertions) => {
       document.getElementById('result-crook').textContent = `It took ${runTime}ms. Insertions: ${insertions}`;
       break;
     default:
-        break;
+      break;
   }
 };
 
@@ -90,26 +90,26 @@ const showToaster = (type, message) => {
   setTimeout(() => {
     toaster.style.top = '-60px';
     toaster.style.opacity = '0';
-    }, type === 'success' ? 3000 : 3500);
+  }, type === 'success' ? 3000 : 3500);
 };
 
 const onChange = (event) => {
-  try {
-    const reader = new FileReader();
-    reader.onload = onReaderLoad;
-    reader.readAsText(event.target.files[0]);
-    showToaster('success', 'Import succeed');
-  } catch (error) {
-    showToaster('error', error);
-  }
+  const reader = new FileReader();
+  reader.onload = onReaderLoad;
+  reader.readAsText(event.target.files[0]);
+  showToaster('success', 'Import succeed');
 };
 
 onReaderLoad = (event) => {
-  const obj = JSON.parse(event.target.result);
+  try {
+    const obj = JSON.parse(event.target.result);
 
-  if (Array.isArray(obj.grid)) {
-    obj.grid.forEach(importingGrid => DATA.push(importingGrid));
-    getPuzzles();
+    if (Array.isArray(obj.grid)) {
+      obj.grid.forEach(importingGrid => DATA.push(importingGrid));
+      getPuzzles();
+    }
+  } catch (error) {
+    showToaster('error', error);
   }
 };
 
