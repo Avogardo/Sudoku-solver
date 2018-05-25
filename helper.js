@@ -102,9 +102,11 @@ const onChange = (event) => {
 onReaderLoad = (event) => {
   const obj = JSON.parse(event.target.result);
   console.log(obj.grid);
-
-  const json = require('./data.json');
-  console.log(json);
+  console.log(DATA);
+  if (Array.isArray(obj.grid)) {
+    obj.grid.forEach(importingGrid => DATA.push(importingGrid));
+    getPuzzles();
+  }
 };
 
 const getPuzzles = () => {
