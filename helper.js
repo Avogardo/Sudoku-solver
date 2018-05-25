@@ -164,7 +164,7 @@ const printChart = () => {
     data: {
       labels,
       datasets: [{
-        label: '# of Votes',
+        label: 'Result [ms]',
         data,
         backgroundColor: [
           'rgba(255, 99, 132, 0.2)',
@@ -176,14 +176,14 @@ const printChart = () => {
           'rgba(54, 162, 235, 1)',
           'rgba(255, 206, 86, 1)',
         ],
-        borderWidth: 1
-      }]
+        borderWidth: 1,
+      }],
     },
     options: {
       scales: {
         yAxes: [{
           ticks: {
-            beginAtZero:true
+            beginAtZero: true,
           }
         }]
       }

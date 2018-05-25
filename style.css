@@ -206,6 +206,16 @@ nav {
     margin-left: 15px;
 }
 
+.chart-section {
+    width: 100%;
+    display: flex;
+    justify-content: center;
+}
+
+.chart-wrapper {
+    width: 600px;
+}
+
 /*********/
 /* MEDIA */
 /*********/
@@ -239,5 +249,9 @@ nav {
 
     .import-button {
         margin-left: 0;
+    }
+
+    .chart-wrapper {
+        width: 90vw;
     }
 }
