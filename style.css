@@ -218,6 +218,7 @@ nav {
 
 .sudoku-container div {
     margin: 0;
+    font-family: monospace;
 }
 
 /*********/

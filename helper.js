@@ -52,11 +52,29 @@ const showGrid = (runTime, algorithm, grid, insertions) => {
 
 const printGrid = (grid, elementId) => {
   let table = '';
+  let cell;
   for (let row = 0; row < 9; row++) {
     for (let col = 0; col < 9; col++) {
-      table += `${grid[row][col]} `;
+      cell = grid[row][col];
+      if ((cell === 0 || Array.isArray(cell)) && !((col + 1) % 3 === 0 && col < 8)) {
+        table += ' 0 ';
+      } else {
+        table += cell;
+        if ((col + 1) % 3 === 0 && col < 8) {
+          table += ' |';
+        }
+
+        if (col !== 8) {
+          table +=  ' ';
+        }
+      }
+
     }
+
     table += '<br>';
+    if ((row + 1) % 3 === 0 && row < 8) {
+      table += "- - - + - - - + - - -<br>"
+    }
   }
 
   document.getElementById(elementId).innerHTML = table;
