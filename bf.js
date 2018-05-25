@@ -85,7 +85,7 @@ const main = (grid, numberOfSolve) => {
     if (i === numberOfSolve) {
       if (solveSudoku(state) === true) {
         solveSudoku(state);
-        printGrid(state, 'outputGrid');
+        printGrid(state, 'result-backtracking-grid');
       } else {
         console.log('no solution');
         document.getElementById('result-backtracking').textContent = `no solution`;

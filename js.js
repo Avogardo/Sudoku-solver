@@ -19,6 +19,7 @@ class JumpingStudent {
     }
     const endTime = performance.now();
 
+    printGrid(this.result, 'result-jumping-student-grid');
     showGrid((endTime - startTime), 'jump', this.result, this.counter, this.counter);
   }
 

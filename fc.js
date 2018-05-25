@@ -113,6 +113,7 @@ const propagate = state => {
     }
     if (!new_unit) {
       result = clone(state);
+      printGrid(result, 'result-crook-grid');
       console.log(1, state);
       return true;
     }
@@ -160,8 +161,8 @@ const crook = (puzzle, numberOfSolve) => {
     if (i === numberOfSolve) {
         const state = read(grid);
         solve(state);
-        const a = clone(state);
-        console.log('fc', a)
+        const result = clone(state);
+        console.log('fc', result)
     } else {
       const state = read(grid);
       solve(state);
