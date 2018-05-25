@@ -94,15 +94,19 @@ const showToaster = (type, message) => {
 };
 
 const onChange = (event) => {
-  const reader = new FileReader();
-  reader.onload = onReaderLoad;
-  reader.readAsText(event.target.files[0]);
+  try {
+    const reader = new FileReader();
+    reader.onload = onReaderLoad;
+    reader.readAsText(event.target.files[0]);
+    showToaster('success', 'Import succeed');
+  } catch (error) {
+    showToaster('error', error);
+  }
 };
 
 onReaderLoad = (event) => {
   const obj = JSON.parse(event.target.result);
-  console.log(obj.grid);
-  console.log(DATA);
+
   if (Array.isArray(obj.grid)) {
     obj.grid.forEach(importingGrid => DATA.push(importingGrid));
     getPuzzles();
