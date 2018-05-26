@@ -82,7 +82,7 @@ const printGrid = (grid, elementId) => {
 
 const showToaster = (type, message) => {
   const toaster = document.querySelector('.toaster');
-  toaster.style.backgroundColor = type === 'success' ? '#4cae4c' : '#d9534f';
+  toaster.style.backgroundColor = type === 'success' ? 'rgb(76, 174, 76)' : 'rgb(217, 83, 79)';
   toaster.textContent = message;
   toaster.style.top = '12px';
   toaster.style.opacity = '1';
