@@ -129,7 +129,7 @@ const setPuzzle = (element, index) => {
   printGrid(selectedPuzzle, 'inputGrid');
 };
 
-const exportToCsv = () => {
+const exportToCsv = allResults => {
   try {
     let Results = [
       allResults.jumping,
@@ -152,7 +152,10 @@ const exportToCsv = () => {
     x.setAttribute("href", CsvString );
     x.setAttribute("download","sudoku results.csv");
     document.body.appendChild(x);
-    x.click();
+    if (allResults.jumping.length && allResults.backtracking.length && allResults.crook.length) {
+      x.click();
+    }
+
 
     showToaster('success', 'Export succeed');
   } catch (error) {

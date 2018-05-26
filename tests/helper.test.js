@@ -90,4 +90,34 @@ describe('Testing helper functionality', () => {
 
     jasmine.clock().uninstall();
   });
+
+  it('should get and display data from database', () => {
+    expect(Array.isArray(DATA)).toBe(true);
+
+    testDomElement.className = 'dropdown-content';
+    getPuzzles();
+
+    expect(testDomElement.querySelectorAll('li').length).toBe(DATA.length);
+  });
+
+  it('should set puzzle from database and display it', () => {
+    testDomElement.id = 'inputGrid';
+
+    setPuzzle(null, '1');
+    expect(selectedPuzzle).toEqual(DATA[1]);
+    expect(testDomElement.textContent.length).toBe(278);
+  });
+
+  it('should create download element', () => {
+    const allResults = {
+      jumping: [],
+      backtracking: [],
+      crook: [],
+    };
+    testDomElement.className = "toaster";
+    exportToCsv(allResults);
+    const a = document.querySelectorAll('a');
+    console.log(a);
+    expect(a.length).toBe(2);
+  });
 });

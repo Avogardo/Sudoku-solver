@@ -53,5 +53,5 @@ document.addEventListener('DOMContentLoaded', () => {
 
   document.getElementById('file').addEventListener('change', onChange);
 
-  document.getElementById('export-button').addEventListener('click', exportToCsv);
+  document.getElementById('export-button').addEventListener('click', () => exportToCsv(allResults));
 });
