@@ -14,4 +14,10 @@ describe('Testing helper functionality', () => {
       c: 3,
     });
   })
+  it('should subtract arrays', () => {
+    const array1 = [1, 2, 3, 4, 5];
+    const array2 = [3, 5];
+
+    expect(arrays_subtraction(array1, array2)).toEqual([1, 2, 4]);
+  })
 });
