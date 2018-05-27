@@ -41,7 +41,7 @@ document.addEventListener('DOMContentLoaded', () => {
         document.querySelector('.results').style.display = 'block';
         console.log(crookCounter);
         clearCounters();
-        printChart();
+        printChart(allResults);
         showToaster('success', 'Succeed');
       } catch (error) {
         console.log(error);

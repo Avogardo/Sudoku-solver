@@ -156,7 +156,6 @@ const exportToCsv = allResults => {
       x.click();
     }
 
-
     showToaster('success', 'Export succeed');
   } catch (error) {
     console.log(error);
@@ -169,7 +168,7 @@ const clearCounters = () => {
   backTrackingCounter = 0;
 };
 
-const printChart = () => {
+const printChart = allResults => {
   const results = clone([
     allResults.jumping,
     allResults.backtracking,

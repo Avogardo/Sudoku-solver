@@ -114,10 +114,15 @@ describe('Testing helper functionality', () => {
       backtracking: [],
       crook: [],
     };
+
     testDomElement.className = "toaster";
     exportToCsv(allResults);
     const a = document.querySelectorAll('a');
-    console.log(a);
     expect(a.length).toBe(2);
+  });
+
+  it('should clear counters', () => {
+    expect(crookCounter).toBe(0);
+    expect(backTrackingCounter).toBe(0);
   });
 });
