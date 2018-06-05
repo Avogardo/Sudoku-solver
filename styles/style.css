@@ -18,6 +18,7 @@ h1 {
 
 .sudoku-container {
   display: flex;
+  visibility: hidden;
   justify-content: space-around;
 }
 

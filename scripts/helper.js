@@ -77,6 +77,7 @@ const printGrid = (grid, elementId) => {
     }
   }
 
+  document.querySelector('.sudoku-container').style.visibility = 'visible';
   document.getElementById(elementId).innerHTML = table;
 };
 
