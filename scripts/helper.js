@@ -32,18 +32,18 @@ const updateLoader = isWorking => {
   document.querySelector('.loader-wrapper').style.opacity = isWorking ? 1 : 0;
 };
 
-const showGrid = (runTime, algorithm, grid, insertions) => {
-  console.log(algorithm, grid);
+const showGrid = (runTime, algorithm, grid, insertions, numberOfSolve) => {
+  console.log(algorithm, grid, numberOfSolve);
 
   switch (algorithm) {
     case 'jump':
-      document.getElementById('result').textContent = `It took ${runTime}ms. Insertions: ${insertions}`;
+      document.getElementById('result').textContent = ` Average runtime: ${runTime / numberOfSolve}ms. Average number of insertions: ${insertions / numberOfSolve}`;
       break;
     case 'back':
-      document.getElementById('result-backtracking').textContent = `It took ${runTime}ms. Insertions: ${insertions}`;
+      document.getElementById('result-backtracking').textContent = ` Average runtime: ${runTime / numberOfSolve}ms. Average number of insertions: ${insertions / numberOfSolve}`;
       break;
     case 'crook':
-      document.getElementById('result-crook').textContent = `It took ${runTime}ms. Insertions: ${insertions}`;
+      document.getElementById('result-crook').textContent = ` Average runtime: ${runTime / numberOfSolve}ms. Average number of insertions: ${insertions / numberOfSolve}`;
       break;
     default:
       break;

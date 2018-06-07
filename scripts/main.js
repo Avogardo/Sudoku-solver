@@ -30,12 +30,12 @@ document.addEventListener('DOMContentLoaded', () => {
         const startTime = performance.now();
         main(selectedPuzzle, numberOfSolve);
         const endTime = performance.now();
-        showGrid((endTime - startTime), 'back', backTrackingCounter, backTrackingCounter);
+        showGrid((endTime - startTime), 'back', backTrackingCounter, backTrackingCounter, numberOfSolve);
 
         const startTimeCrook = performance.now();
         crook(selectedPuzzle, numberOfSolve);
         const endTimeCrook = performance.now();
-        showGrid((endTimeCrook - startTimeCrook), 'crook', crookCounter, crookCounter);
+        showGrid((endTimeCrook - startTimeCrook), 'crook', crookCounter, crookCounter, numberOfSolve);
 
         updateLoader();
         document.querySelector('.results').style.display = 'block';

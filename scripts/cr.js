@@ -162,7 +162,7 @@ const crook = (puzzle, numberOfSolve) => {
         const state = read(grid);
         solve(state);
         const result = clone(state);
-        console.log('fc', result)
+        console.log('cr', result)
     } else {
       const state = read(grid);
       solve(state);
