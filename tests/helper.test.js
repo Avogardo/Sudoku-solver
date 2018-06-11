@@ -57,10 +57,10 @@ describe('Testing helper functionality', () => {
 
     cases.forEach(oneCase => {
       testDomElement.id = oneCase.elementId;
-      showGrid(3, oneCase.switchCase, null, 5);
+      showGrid(3, oneCase.switchCase, null, 5, 2);
 
-      expect(testDomElement.textContent).toContain(3);
-      expect(testDomElement.textContent).toContain(5);
+      expect(testDomElement.textContent).toContain(1.5);
+      expect(testDomElement.textContent).toContain(2.5);
 
       testDomElement.textContent = '';
     });
@@ -102,11 +102,15 @@ describe('Testing helper functionality', () => {
 
   it('should set puzzle from database and display it', () => {
     testDomElement.id = 'inputGrid';
+    const container = document.createElement('div');
+    container.className = 'sudoku-container';
+    document.querySelector('body').appendChild(container);
 
     setPuzzle(null, '1');
     expect(selectedPuzzle).toEqual(DATA[1]);
     expect(testDomElement.textContent.length).toBe(278);
-  });
+    document.querySelector('body').removeChild(container);
+    });
 
   it('should create download element', () => {
     const allResults = {

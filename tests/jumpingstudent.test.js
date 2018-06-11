@@ -6,8 +6,11 @@ describe('Testing helper functionality', () => {
   result.id = 'result-jumping-student-grid';
   result2.id = 'result';
   let jumpingStudent;
+  const container = document.createElement('div');
+  container.className = 'sudoku-container';
 
   beforeEach(() => {
+    document.querySelector('body').appendChild(container);
     document.querySelector('body').appendChild(result);
     document.querySelector('body').appendChild(result2);
     jumpingStudent = new JumpingStudent(DATA[0], 1);
@@ -18,6 +21,7 @@ describe('Testing helper functionality', () => {
     document.querySelector('body').removeChild(testDomElement);
     document.querySelector('body').removeChild(result);
     document.querySelector('body').removeChild(result2);
+    document.querySelector('body').removeChild(container);
   });
 
   it('read should call propagate_step', () => {
